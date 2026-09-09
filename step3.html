@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>웹앱 제작 연습 · 대기·해양 데이터 프로젝트</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="index.html">과학자는 <span class="accent">데이터</span>로 의사소통한다</a>
+    <span class="kicker">지구과학 · 대기와 해양의 상호작용</span>
+  </div>
+  <nav class="steptrack" aria-label="단계 이동">
+    <div class="wrap">
+      <a href="step1.html"><span class="st-num">STEP 01</span><span class="st-name">목표 및 평가 항목</span></a>
+      <a href="step2.html"><span class="st-num">STEP 02</span><span class="st-name">데이터 분석 방법</span></a>
+      <a href="step3.html" aria-current="step"><span class="st-num">STEP 03</span><span class="st-name">웹앱 제작 연습</span></a>
+      <a href="step4.html"><span class="st-num">STEP 04</span><span class="st-name">데이터 활용 가이드</span></a>
+      <a href="step5.html"><span class="st-num">STEP 05</span><span class="st-name">기획안 작성</span></a>
+      <a href="step6.html"><span class="st-num">STEP 06</span><span class="st-name">웹앱 구현 및 점검</span></a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="pagehead">
+      <h1>웹앱 제작 연습</h1>
+      <p class="readtime">약 20분</p>
+    </div>
+
+    <!-- 01. 오늘 할 일 -->
+    <section class="stepsection" id="sec-01">
+      <div class="section-head"><h2><span class="idx">01</span>오늘 할 일</h2></div>
+      <p class="lead">5차시 기획안 작성, 6차시 웹앱 구현에 들어가기 전에, AI 코딩 도구로 짧은 웹앱을 직접 만들어보는 연습입니다.</p>
+      <p>오늘 만든 결과물은 제출하지 않습니다. 아래 데이터 중 하나를 골라 프롬프트를 AI에게 던지고, 나온 코드를 실행해서 웹앱이 작동하는지 확인해 보세요. 재미있게 만들어졌다면, 맨 아래 안내를 따라 원하는 사람만 공유하면 됩니다.</p>
+      <ul class="flowsteps">
+        <li><strong>데이터 고르기</strong><span>예시 또는 실제 데이터 중 하나를 선택합니다.</span></li>
+        <li><strong>프롬프트 준비하기</strong><span>예시를 참고해 나만의 프롬프트를 완성합니다.</span></li>
+        <li><strong>실행해서 확인하기</strong><span>AI 코딩 도구에 붙여넣고 결과를 봅니다.</span></li>
+        <li><strong>공유하기 (선택)</strong><span>마음에 들면 Teams에 올립니다.</span></li>
+      </ul>
+    </section>
+
+    <!-- 02. 사용할 데이터 -->
+    <section class="stepsection" id="sec-02">
+      <div class="section-head"><h2><span class="idx">02</span>사용할 데이터</h2></div>
+      <p class="lead">두 가지 데이터셋 중 하나를 골라 쓰면 됩니다. 예시 데이터는 CSV 파일을 직접 업로드해보는 연습, 실제 데이터는 오픈소스 데이터를 API로 가져오는 연습입니다.</p>
+
+      <div class="datapick">
+        <div class="datapick-card" data-source="example">
+          <span class="badge b-live">누구나 사용 가능</span>
+          <h3>예시 데이터</h3>
+          <p>8개 반 160명의 가상 응답입니다. 실제 학생 데이터가 아니라 연습용으로 만든 자료입니다. CSV 파일로 내려받아서 AI 코딩 도구에 직접 첨부하는 방식으로 사용합니다.</p>
+          <button class="btn tide" id="btn-pick-example" type="button">예시 데이터 선택</button>
+          <button class="btn ghost" id="btn-download-example" type="button">⬇ CSV 파일 다운로드</button>
+        </div>
+        <div class="datapick-card" data-source="real">
+          <span class="badge b-todo">비밀번호 필요</span>
+          <h3>실제 데이터</h3>
+          <p>우리 학교 전교생이 실제로 응답한 데이터입니다. 오픈소스 데이터를 API로 가져와 쓰는 연습입니다. 선생님에게 받은 비밀번호를 입력하면 데이터를 바로 불러옵니다.</p>
+          <div class="pwrow">
+            <input type="password" id="real-password" placeholder="비밀번호" autocomplete="off">
+            <button class="btn ghost" id="btn-pick-real" type="button">확인</button>
+          </div>
+        </div>
+      </div>
+
+      <p class="lstate" id="data-status" aria-live="polite"></p>
+      <button class="btn ghost" id="btn-fallback" type="button" hidden>예시 데이터로 전환</button>
+    </section>
+
+    <!-- 03. 데이터 미리보기 -->
+    <section class="stepsection" id="sec-03">
+      <div class="section-head"><h2><span class="idx">03</span>데이터 미리보기</h2></div>
+      <p class="lead">선택한 데이터를 여기서 바로 훑어볼 수 있습니다.</p>
+
+      <div class="note" id="preview-guard">먼저 <a href="#sec-02">02. 사용할 데이터</a>에서 데이터를 선택해주세요.</div>
+      <div id="preview-content" hidden>
+        <p class="section-note" id="preview-meta"></p>
+        <div class="tablewrap">
+          <table class="table">
+            <thead><tr><th>필드명</th><th>문항</th><th>응답 분포</th></tr></thead>
+            <tbody id="preview-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04. 프롬프트 예시 보기 -->
+    <section class="stepsection" id="sec-04">
+      <div class="section-head"><h2><span class="idx">04</span>프롬프트 예시 보기</h2></div>
+      <p class="lead">프롬프트를 이렇게 채우면, 이런 웹앱이 나옵니다. 아래는 여러분이 02섹션에서 고른 데이터를 기준으로 미리 만들어본 예시입니다.</p>
+
+      <div class="note" id="example-guard">먼저 <a href="#sec-02">02. 사용할 데이터</a>에서 데이터를 선택해주세요.</div>
+      <div id="example-content" hidden>
+        <div class="codeblock promptblock">
+          <button class="copy" type="button">복사</button>
+          <pre id="example-prompt-pre"></pre>
+        </div>
+        <div class="card">
+          <h3>결과 예시</h3>
+          <p>이 프롬프트를 넣으면 대략 이런 웹앱이 나옵니다 — 아래 그래프는 실제 예시 데이터(160명)로 미리 계산해본 것입니다.</p>
+        </div>
+        <div class="chartbox">
+          <div class="chart-title">E/I별 모둠 역할 선호</div>
+          <div class="chart-sub" id="example-chart-sub"></div>
+          <svg class="chart-svg" id="example-chart-svg" viewBox="0 0 560 260" role="img" aria-label="E/I별 모둠 역할 선호 막대그래프"></svg>
+          <div class="chartlegend" id="example-chart-legend"></div>
+        </div>
+        <div class="card">
+          <p>그래프 아래에는 "그런데 이 결과만으로 성격이 역할을 100% 결정한다고 말할 수 있을까?"처럼, 경향은 있지만 예외도 많다는 걸 짚어주는 짧은 문장이 붙어 있으면 더 좋습니다 — 이건 05에서 직접 만들 때 참고할 부분입니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05. 프롬프트 만들기 -->
+    <section class="stepsection" id="sec-05">
+      <div class="section-head"><h2><span class="idx">05</span>프롬프트 만들기</h2></div>
+      <p class="lead">아래 빈칸을 채우면 전체 프롬프트가 완성됩니다. AI 코딩 도구는 자유 선택입니다 — 평소 쓰는 AI에 그대로 붙여넣으면 됩니다.</p>
+
+      <div class="note" id="build-guard">먼저 <a href="#sec-02">02. 사용할 데이터</a>에서 데이터를 선택해주세요.</div>
+      <div id="build-content" hidden>
+
+        <div class="rule-datasrc">데이터 출처: <strong id="rule-datasrc-text">-</strong></div>
+        <details class="rulebox">
+          <summary>전체 규칙 보기</summary>
+          <pre id="rulebox-pre"></pre>
+        </details>
+
+        <h3 class="subhead">사용할 문항 <span class="hint">(2~5개 내외 추천)</span></h3>
+        <div class="fieldpicker" id="fieldpicker"></div>
+
+        <div class="buildfields">
+          <div>
+            <label for="build-howshow">보여주는 방식</label>
+            <input type="text" id="build-howshow" placeholder="예: 막대그래프, 파이차트, 자유">
+          </div>
+          <div>
+            <label for="build-mood">디자인 무드 (선택)</label>
+            <input type="text" id="build-mood" placeholder="비워도 됩니다">
+          </div>
+        </div>
+
+        <button class="btn" id="btn-copy-prompt" type="button">복사하기</button>
+        <p class="lstate" id="build-status" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- 06. 다시 대화해서 수정하기 -->
+    <section class="stepsection" id="sec-06">
+      <div class="section-head"><h2><span class="idx">06</span>다시 대화해서 수정하기</h2></div>
+      <p class="lead">한 번에 완벽하게 만들어지는 경우는 거의 없습니다.</p>
+      <p>그래프가 이상하게 나오거나, 원하던 것과 다르게 만들어졌다면 — 처음부터 다시 만들 필요 없이 "이 부분이 이상해, 이렇게 고쳐줘" 하고 이어서 말하면 됩니다. AI와 대화하며 다듬어가는 과정 자체가 이 연습의 목적입니다.</p>
+    </section>
+
+    <!-- 07. 재미있게 만들었다면 -->
+    <section class="stepsection" id="sec-07">
+      <div class="section-head"><h2><span class="idx">07</span>재미있게 만들었다면</h2></div>
+      <p class="lead">희망자만 공유하면 됩니다.</p>
+      <p>완성한 웹앱이 마음에 든다면, Teams의 <strong>지구과학</strong> 채널에 링크나 파일을 공유해 주세요. 제출은 의무가 아니라 희망자만 하는 것입니다.</p>
+    </section>
+
+    <!-- 08. 다음 단계 -->
+    <section class="stepsection" id="sec-08">
+      <div class="section-head"><h2><span class="idx">08</span>다음 단계</h2></div>
+      <div class="note tide">다음은 <strong>데이터 활용 가이드</strong>입니다. 오늘 다룬 것보다 더 다양한 공공데이터를 어떻게 찾고 다루는지 살펴봅니다.</div>
+    </section>
+
+    <p class="savenote">이 페이지에 입력한 내용은 저장되지 않습니다. 새로고침하거나 페이지를 벗어나면 사라지니, 필요한 내용은 따로 기록해 두세요.</p>
+
+    <nav class="pagenav">
+      <a href="step2.html">← 데이터 분석 방법</a>
+      <a class="nav-home" href="index.html">메인으로</a>
+      <a href="step4.html">데이터 활용 가이드 →</a>
+    </nav>
+  </div>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
