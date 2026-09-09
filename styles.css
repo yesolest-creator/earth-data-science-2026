@@ -1505,3 +1505,19 @@ a.hubcard:hover .go{color:var(--abyss);transform:translateX(3px);}
 /* 03 하단 — CSV를 AI에 넣어 살펴보는 프롬프트 */
 .analyzeblock{margin-top:30px;}
 .analyzeblock .subhead{margin-bottom:6px;}
+
+/* ---------- 33. step3 02 — 비밀번호 줄에 CSV 버튼 나란히 ---------- */
+.pwrow{flex-wrap:wrap;align-items:center;}
+.pwrow input{flex:0 0 116px;width:116px;}
+.pwrow .btn{flex:none;padding-top:9px;padding-bottom:9px;}
+
+/* ---------- 34. step3 04 — 그래프 아래 정리 문장 ---------- */
+.chartbox .chart-note{
+  margin-top:16px;
+  padding-top:14px;
+  border-top:1px solid var(--line);
+  font-size:13.5px;
+  line-height:1.75;
+  color:var(--slate);
+}
+.chartbox .chart-note strong{color:var(--abyss);font-weight:600;}
