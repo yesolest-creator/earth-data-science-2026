@@ -48,7 +48,7 @@
     <!-- 02. 사용할 데이터 -->
     <section class="stepsection" id="sec-02">
       <div class="section-head"><h2><span class="idx">02</span>사용할 데이터</h2></div>
-      <p class="lead">두 가지 데이터셋 중 하나를 골라 쓰면 됩니다. 예시 데이터는 CSV 파일을 직접 업로드해보는 연습, 실제 데이터는 오픈소스 데이터를 API로 가져오는 연습입니다.</p>
+      <p class="lead">두 가지 데이터셋 중 하나를 골라 쓰면 됩니다. 예시 데이터는 CSV 파일을 직접 업로드해보는 연습, 실제 데이터는 웹 링크로 데이터를 불러오는 연습입니다.</p>
 
       <div class="datapick">
         <div class="datapick-card" data-source="example">
@@ -61,11 +61,12 @@
         <div class="datapick-card" data-source="real">
           <span class="badge b-todo">비밀번호 필요</span>
           <h3>실제 데이터</h3>
-          <p>우리 학교 전교생이 실제로 응답한 데이터입니다. 오픈소스 데이터를 API로 가져와 쓰는 연습입니다. 선생님에게 받은 비밀번호를 입력하면 데이터를 바로 불러옵니다.</p>
+          <p>우리 학교 전교생이 실제로 응답한 데이터입니다. 웹 링크로 데이터를 불러와 쓰는 연습입니다. 선생님에게 받은 비밀번호를 입력하면 데이터를 바로 불러옵니다.</p>
           <div class="pwrow">
             <input type="password" id="real-password" placeholder="비밀번호" autocomplete="off">
             <button class="btn ghost" id="btn-pick-real" type="button">확인</button>
           </div>
+          <button class="btn ghost" id="btn-download-real" type="button" hidden>⬇ CSV 파일 다운로드</button>
         </div>
       </div>
 
@@ -87,6 +88,32 @@
             <tbody id="preview-tbody"></tbody>
           </table>
         </div>
+
+        <div class="analyzeblock">
+          <h3 class="subhead">AI에게 먼저 물어보기</h3>
+          <p>표만 봐서는 문항 사이의 관계까지는 보이지 않습니다. 위 02에서 <strong>CSV 파일을 내려받아</strong> AI 도구에 첨부하고, 아래 프롬프트를 함께 보내보세요. 어떤 문항끼리 관련이 있어 보이는지, 웹앱 소재로 무엇이 흥미로울지 짚어줍니다.</p>
+          <div class="codeblock promptblock">
+            <button class="copy" type="button">복사</button>
+            <pre>첨부한 CSV는 전교생을 대상으로 진행한 선호도 조사 결과야.
+이 데이터를 활용해서 웹앱을 하나 만들려고 하는데, 어떤 주제로 만들면
+좋을지 아이디어를 얻고 싶어서 먼저 데이터를 살펴보려고 해.
+
+아래 순서로 봐줘.
+
+1. 각 열(문항)이 무엇을 묻는 항목인지 한 줄씩 정리해줘.
+2. 문항들 사이에 상관관계가 있어 보이는 조합을 찾아서 표로 보여줘.
+   (예: A 문항과 B 문항 응답이 서로 관련 있어 보이는지)
+   상관관계의 강도를 수치로 보여주고, 강한 순서대로 정렬해줘.
+3. 그 결과를 바탕으로, 이 데이터로 웹앱을 만든다면 흥미로울 만한
+   분석 주제를 3가지 제안해줘. 각 주제마다 "왜 흥미로운지", "어떤
+   문항들을 조합해서 보여줄 수 있는지"를 한두 문장으로 설명해줘.
+
+단, 상관관계가 있다고 해서 한쪽이 다른 쪽의 원인이라고 단정하지 말고,
+"관련이 있어 보인다" 정도로 표현해줘. 상관과 인과는 다르다는 점을
+염두에 두고 답해줘.</pre>
+          </div>
+          <div class="note tide">AI가 제안한 주제를 그대로 쓸 필요는 없습니다. 마음에 드는 것이 없으면 무시하고, 05에서 직접 문항을 골라도 됩니다.</div>
+        </div>
       </div>
     </section>
 
@@ -103,16 +130,16 @@
         </div>
         <div class="card">
           <h3>결과 예시</h3>
-          <p>이 프롬프트를 넣으면 대략 이런 웹앱이 나옵니다 — 아래 그래프는 실제 예시 데이터(160명)로 미리 계산해본 것입니다.</p>
+          <p>이 프롬프트를 넣으면 대략 이런 웹앱이 나옵니다 — 아래 그래프는 02에서 고른 데이터로 실제 계산해본 것입니다.</p>
         </div>
         <div class="chartbox">
-          <div class="chart-title">E/I별 모둠 역할 선호</div>
+          <div class="chart-title">반별 E/I 비율</div>
           <div class="chart-sub" id="example-chart-sub"></div>
-          <svg class="chart-svg" id="example-chart-svg" viewBox="0 0 560 260" role="img" aria-label="E/I별 모둠 역할 선호 막대그래프"></svg>
+          <svg class="chart-svg" id="example-chart-svg" viewBox="0 0 560 260" role="img" aria-label="반별 E/I 비율 100% 누적 막대그래프"></svg>
           <div class="chartlegend" id="example-chart-legend"></div>
         </div>
         <div class="card">
-          <p>그래프 아래에는 "그런데 이 결과만으로 성격이 역할을 100% 결정한다고 말할 수 있을까?"처럼, 경향은 있지만 예외도 많다는 걸 짚어주는 짧은 문장이 붙어 있으면 더 좋습니다 — 이건 05에서 직접 만들 때 참고할 부분입니다.</p>
+          <p>그래프 아래에는 "그런데 이 차이만으로 어느 반이 더 외향적이라고 말할 수 있을까?"처럼, 반마다 20명씩이라 우연히 갈릴 수도 있다는 걸 짚어주는 짧은 문장이 붙어 있으면 더 좋습니다 — 이건 05에서 직접 만들 때 참고할 부분입니다.</p>
         </div>
       </div>
     </section>
@@ -161,7 +188,7 @@
     <section class="stepsection" id="sec-07">
       <div class="section-head"><h2><span class="idx">07</span>재미있게 만들었다면</h2></div>
       <p class="lead">희망자만 공유하면 됩니다.</p>
-      <p>완성한 웹앱이 마음에 든다면, Teams의 <strong>지구과학</strong> 채널에 링크나 파일을 공유해 주세요. 제출은 의무가 아니라 희망자만 하는 것입니다.</p>
+      <p>완성한 웹앱이 마음에 든다면, Teams에서 <strong>선생님에게 개인 채팅으로 파일을 보내</strong> 주세요. 제출은 의무가 아니라 희망자만 하는 것입니다.</p>
     </section>
 
     <!-- 08. 다음 단계 -->

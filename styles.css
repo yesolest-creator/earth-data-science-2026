@@ -1467,3 +1467,41 @@ a.hubcard:hover .go{color:var(--abyss);transform:translateX(3px);}
 /* ---------- 31. step3 — CSV 직접 내장으로 길어진 프롬프트 블록 스크롤 처리 ---------- */
 .codeblock.promptblock pre{max-height:440px;overflow-y:auto;}
 .rulebox pre{max-height:360px;overflow-y:auto;}
+
+/* ---------- 32. step3 03 — 응답 분포 누적 막대 · AI 분석 프롬프트 ---------- */
+.table .distcell{min-width:220px;}
+.distbar{
+  display:flex;
+  width:100%;
+  height:18px;
+  border-radius:5px;
+  overflow:hidden;
+  background:var(--paper);
+}
+.distseg{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:var(--font-mono);
+  font-size:10.5px;
+  font-weight:600;
+  line-height:1;
+  white-space:nowrap;
+  overflow:hidden;
+}
+.distlegend{
+  display:flex;
+  flex-wrap:wrap;
+  gap:4px 12px;
+  margin-top:7px;
+  font-size:12.5px;
+  color:var(--slate);
+}
+.distlegend .distkey{display:inline-flex;align-items:center;gap:6px;}
+.distlegend i{width:9px;height:9px;border-radius:2px;flex:none;}
+.distlegend b{font-family:var(--font-mono);font-weight:600;color:var(--abyss);}
+.dim-note{color:var(--mist);font-size:13px;}
+
+/* 03 하단 — CSV를 AI에 넣어 살펴보는 프롬프트 */
+.analyzeblock{margin-top:30px;}
+.analyzeblock .subhead{margin-bottom:6px;}
