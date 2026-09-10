@@ -1033,14 +1033,11 @@ function step3DataSourceBlock() {
       byHeader;
   }
   if (STEP3_STATE.source === "real") {
-    const url = REAL_APPS_SCRIPT_URL + "?password=" + encodeURIComponent(STEP3_STATE.password || "");
+    const headers = (STEP3_STATE.rows && STEP3_STATE.rows[0]) ? Object.keys(STEP3_STATE.rows[0]) : [];
     return "- 데이터는 우리 학교 전교생이 답한 성향·취향 관련 객관식 설문 응답이다.\n" +
-      "- 앞서 내가 올린 CSV 파일과 아래 링크의 데이터는 같은 내용이다. 문항 구성과\n" +
-      "  응답 값을 파악할 때는 올린 CSV를 참고하고, 웹앱에서는 아래 링크로 데이터를\n" +
-      "  불러온다.\n" +
-      "  링크: " + url + "\n" +
-      "- 링크의 응답 형식은 { ok:true, data:[ {필드명:값, ...}, ... ] } 이며,\n" +
-      "  data 배열의 각 항목이 한 명의 응답이다.\n" +
+      "- 앞서 내가 올린 CSV 파일(real_data.csv)이 그 데이터다. 그 내용을 코드 안에\n" +
+      "  정적 데이터로 그대로 포함시켜라. 외부 링크나 API를 호출하지 않는다.\n" +
+      "- 파일의 헤더(열 이름)는 다음과 같다: " + headers.join(", ") + "\n" +
       byHeader;
   }
   return "- (먼저 02섹션에서 데이터를 선택해 주세요)";
