@@ -1521,3 +1521,18 @@ a.hubcard:hover .go{color:var(--abyss);transform:translateX(3px);}
   color:var(--slate);
 }
 .chartbox .chart-note strong{color:var(--abyss);font-weight:600;}
+
+/* ---------- 35. step3 05 — 공통 규칙만 복사 ---------- */
+.rulecopy{
+  margin:0 0 24px;
+  padding:16px 18px;
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+}
+.rulecopy p{
+  font-size:13.5px;
+  line-height:1.7;
+  color:var(--slate);
+  margin:0 0 12px;
+}

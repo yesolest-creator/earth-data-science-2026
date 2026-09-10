@@ -1020,20 +1020,28 @@ function step3DownloadRealCSV() {
 }
 
 function step3DataSourceBlock() {
+  const byHeader =
+    "- 값은 헤더(필드) 이름으로 찾는다. 문항이 빠지거나 순서가 바뀌어도 이름으로\n" +
+    "  찾도록 코드를 짠다.";
+
   if (STEP3_STATE.source === "example") {
     const headerList = STEP3_EXAMPLE_HEADERS.join(", ");
     return "- 데이터는 반 친구들이 답한 성향·취향 관련 객관식 설문 응답이다.\n" +
-      "- 데이터는 미리 다운로드한 CSV 파일(example_data.csv)을 사용한다. 이 프롬프트와\n" +
-      "  함께 그 파일을 AI 코딩 도구에 첨부(업로드)해서 전달해라.\n" +
+      "- 앞서 내가 올린 CSV 파일(example_data.csv)이 그 데이터다. 그 내용을 코드 안에\n" +
+      "  정적 데이터로 그대로 포함시켜라.\n" +
       "- 파일의 헤더(열 이름)는 다음과 같다: " + headerList + "\n" +
-      "- CSV는 헤더 기준으로 읽는다. 문항이 빠지거나 순서가 바뀌어도 헤더 이름으로 값을\n" +
-      "  찾도록 코드를 짠다. 첨부한 파일 내용을 코드 안에 정적 데이터로 그대로 포함시켜라.";
+      byHeader;
   }
   if (STEP3_STATE.source === "real") {
     const url = REAL_APPS_SCRIPT_URL + "?password=" + encodeURIComponent(STEP3_STATE.password || "");
     return "- 데이터는 우리 학교 전교생이 답한 성향·취향 관련 객관식 설문 응답이다.\n" +
-      "- 데이터는 아래 링크에서 JSON 형식으로 제공된다: " + url + "\n" +
-      "- 응답 형식은 { ok:true, data:[ {필드명:값, ...}, ... ] } 이며, data 배열의 각 항목이 한 명의 응답이다.";
+      "- 앞서 내가 올린 CSV 파일과 아래 링크의 데이터는 같은 내용이다. 문항 구성과\n" +
+      "  응답 값을 파악할 때는 올린 CSV를 참고하고, 웹앱에서는 아래 링크로 데이터를\n" +
+      "  불러온다.\n" +
+      "  링크: " + url + "\n" +
+      "- 링크의 응답 형식은 { ok:true, data:[ {필드명:값, ...}, ... ] } 이며,\n" +
+      "  data 배열의 각 항목이 한 명의 응답이다.\n" +
+      byHeader;
   }
   return "- (먼저 02섹션에서 데이터를 선택해 주세요)";
 }
@@ -1043,7 +1051,8 @@ const STEP3_ROLE =
 const STEP3_CONTEXT =
   "이 요청을 하는 사용자는 고등학생이며, AI 도구를 활용한 웹앱 제작 과정을\n  경험하는 것이 목적이다.";
 const STEP3_OUTPUT =
-  "- 결과물은 index.html 파일 하나로만 만든다.\n" +
+  "- 결과물은 HTML 파일 하나로만 만든다. 파일 이름은 웹앱 제목을 그대로 쓴다.\n" +
+  "  (예: 웹앱 제목이 \"우리 학교 민초 논쟁\"이면 → 우리학교_민초논쟁.html)\n" +
   "- CSS는 전부 <style> 태그 안에, JavaScript는 전부 <script> 태그 안에 포함한다.\n" +
   "  별도의 .css, .js 파일로 분리하지 않는다.\n" +
   "- 데스크톱 브라우저(노트북 화면 크기)에서 보는 것을 기준으로 만든다.";
@@ -1055,12 +1064,19 @@ const STEP3_REQUEST =
   "- 문제없으면 어떤 방식으로 만들 건지 간단히 설명해줘. 내가 확인하고 \"시작해줘\"라고\n" +
   "  하면 그때 코드를 만들어줘.";
 
+/* 규칙 본문 — 역할 · 맥락 · 데이터 출처 · 출력 형식 · 보안 (요청은 빠져 있다) */
 function step3FixedPrompt() {
   return "■ 역할\n- " + STEP3_ROLE + "\n\n" +
     "■ 사용자 맥락\n- " + STEP3_CONTEXT + "\n\n" +
     "■ 데이터 출처 (반드시 지킬 것)\n" + step3DataSourceBlock() + "\n\n" +
     "■ 출력 형식 (반드시 지킬 것)\n" + STEP3_OUTPUT + "\n\n" +
     "■ 데이터·보안 원칙 (반드시 지킬 것)\n" + STEP3_SECURITY;
+}
+
+/* 공통 규칙 — 규칙 본문 뒤에 요청까지 붙인 것.
+   이미 AI와 대화하며 주제를 정한 학생이 그 대화에 그대로 붙여넣는 용도. */
+function step3CommonRules() {
+  return step3FixedPrompt() + "\n\n■ 요청\n" + STEP3_REQUEST;
 }
 
 
@@ -1255,7 +1271,7 @@ function step3RenderFieldPicker() {
 function step3RenderRuleBox() {
   const pre = document.getElementById("rulebox-pre");
   const srcLine = document.getElementById("rule-datasrc-text");
-  if (pre) pre.textContent = step3FixedPrompt();
+  if (pre) pre.textContent = step3CommonRules();
   if (srcLine) {
     srcLine.textContent = STEP3_STATE.source === "example" ? "예시 데이터 (CSV 링크)"
       : STEP3_STATE.source === "real" ? "실제 데이터 (비밀번호 포함 링크)" : "-";
@@ -1276,6 +1292,38 @@ function step3BuildPrompt() {
   if (mood.trim()) text += "■ 디자인 무드\n- " + mood.trim() + "\n\n";
   text += "■ 요청\n" + STEP3_REQUEST;
   return text;
+}
+
+/* 버튼 하나에 복사 동작 + 완료 표시를 붙인다 */
+function step3AttachCopy(btn, getText, okMsg) {
+  if (!btn) return;
+  btn.addEventListener("click", function () {
+    const status = document.getElementById("build-status");
+    const text = getText();
+    if (text === null) return;
+    if (!navigator.clipboard) return;
+    navigator.clipboard.writeText(text).then(function () {
+      if (status) { status.textContent = okMsg; status.className = "lstate ok"; }
+      const old = btn.textContent;
+      btn.textContent = "복사됨";
+      setTimeout(function () { btn.textContent = old; }, 1400);
+    });
+  });
+}
+
+function step3InitRuleCopy() {
+  step3AttachCopy(
+    document.getElementById("btn-copy-rules"),
+    function () {
+      if (!STEP3_STATE.rows) {
+        const status = document.getElementById("build-status");
+        if (status) { status.textContent = "먼저 02에서 데이터를 골라주세요."; status.className = "lstate err"; }
+        return null;
+      }
+      return step3CommonRules();
+    },
+    "공통 규칙을 복사했습니다. 주제를 정한 AI 대화에 그대로 붙여넣으세요."
+  );
 }
 
 function step3InitBuilder() {
@@ -1348,6 +1396,7 @@ function initStep3() {
   if (fb) fb.addEventListener("click", step3LoadExample);
 
   step3RenderFieldPicker();
+  step3InitRuleCopy();
   step3InitBuilder();
   step3ToggleGuards();
 }
