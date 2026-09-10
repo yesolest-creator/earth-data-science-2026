@@ -1270,8 +1270,8 @@ function step3RenderRuleBox() {
   const srcLine = document.getElementById("rule-datasrc-text");
   if (pre) pre.textContent = step3CommonRules();
   if (srcLine) {
-    srcLine.textContent = STEP3_STATE.source === "example" ? "예시 데이터 (CSV 링크)"
-      : STEP3_STATE.source === "real" ? "실제 데이터 (비밀번호 포함 링크)" : "-";
+    srcLine.textContent = STEP3_STATE.source === "example" ? "예시 데이터 (CSV 첨부)"
+      : STEP3_STATE.source === "real" ? "실제 데이터 (CSV 첨부)" : "-";
   }
 }
 
