@@ -1020,25 +1020,20 @@ function step3DownloadRealCSV() {
 }
 
 function step3DataSourceBlock() {
-  const byHeader =
-    "- 값은 헤더(필드) 이름으로 찾는다. 문항이 빠지거나 순서가 바뀌어도 이름으로\n" +
-    "  찾도록 코드를 짠다.";
-
   if (STEP3_STATE.source === "example") {
     const headerList = STEP3_EXAMPLE_HEADERS.join(", ");
     return "- 데이터는 반 친구들이 답한 성향·취향 관련 객관식 설문 응답이다.\n" +
-      "- 앞서 내가 올린 CSV 파일(example_data.csv)이 그 데이터다. 그 내용을 코드 안에\n" +
-      "  정적 데이터로 그대로 포함시켜라.\n" +
+      "- 데이터는 미리 다운로드한 CSV 파일(example_data.csv)을 사용한다. 이 프롬프트와\n" +
+      "  함께 그 파일을 AI 코딩 도구에 첨부(업로드)해서 전달해라.\n" +
       "- 파일의 헤더(열 이름)는 다음과 같다: " + headerList + "\n" +
-      byHeader;
+      "- CSV는 헤더 기준으로 읽는다. 문항이 빠지거나 순서가 바뀌어도 헤더 이름으로 값을\n" +
+      "  찾도록 코드를 짠다. 첨부한 파일 내용을 코드 안에 정적 데이터로 그대로 포함시켜라.";
   }
   if (STEP3_STATE.source === "real") {
-    const headers = (STEP3_STATE.rows && STEP3_STATE.rows[0]) ? Object.keys(STEP3_STATE.rows[0]) : [];
+    const url = REAL_APPS_SCRIPT_URL + "?password=" + encodeURIComponent(STEP3_STATE.password || "");
     return "- 데이터는 우리 학교 전교생이 답한 성향·취향 관련 객관식 설문 응답이다.\n" +
-      "- 앞서 내가 올린 CSV 파일(real_data.csv)이 그 데이터다. 그 내용을 코드 안에\n" +
-      "  정적 데이터로 그대로 포함시켜라. 외부 링크나 API를 호출하지 않는다.\n" +
-      "- 파일의 헤더(열 이름)는 다음과 같다: " + headers.join(", ") + "\n" +
-      byHeader;
+      "- 데이터는 아래 링크에서 JSON 형식으로 제공된다: " + url + "\n" +
+      "- 응답 형식은 { ok:true, data:[ {필드명:값, ...}, ... ] } 이며, data 배열의 각 항목이 한 명의 응답이다.";
   }
   return "- (먼저 02섹션에서 데이터를 선택해 주세요)";
 }
@@ -1048,8 +1043,7 @@ const STEP3_ROLE =
 const STEP3_CONTEXT =
   "이 요청을 하는 사용자는 고등학생이며, AI 도구를 활용한 웹앱 제작 과정을\n  경험하는 것이 목적이다.";
 const STEP3_OUTPUT =
-  "- 결과물은 HTML 파일 하나로만 만든다. 파일 이름은 웹앱 제목을 그대로 쓴다.\n" +
-  "  (예: 웹앱 제목이 \"우리 학교 민초 논쟁\"이면 → 우리학교_민초논쟁.html)\n" +
+  "- 결과물은 index.html 파일 하나로만 만든다.\n" +
   "- CSS는 전부 <style> 태그 안에, JavaScript는 전부 <script> 태그 안에 포함한다.\n" +
   "  별도의 .css, .js 파일로 분리하지 않는다.\n" +
   "- 데스크톱 브라우저(노트북 화면 크기)에서 보는 것을 기준으로 만든다.";
@@ -1061,19 +1055,12 @@ const STEP3_REQUEST =
   "- 문제없으면 어떤 방식으로 만들 건지 간단히 설명해줘. 내가 확인하고 \"시작해줘\"라고\n" +
   "  하면 그때 코드를 만들어줘.";
 
-/* 규칙 본문 — 역할 · 맥락 · 데이터 출처 · 출력 형식 · 보안 (요청은 빠져 있다) */
 function step3FixedPrompt() {
   return "■ 역할\n- " + STEP3_ROLE + "\n\n" +
     "■ 사용자 맥락\n- " + STEP3_CONTEXT + "\n\n" +
     "■ 데이터 출처 (반드시 지킬 것)\n" + step3DataSourceBlock() + "\n\n" +
     "■ 출력 형식 (반드시 지킬 것)\n" + STEP3_OUTPUT + "\n\n" +
     "■ 데이터·보안 원칙 (반드시 지킬 것)\n" + STEP3_SECURITY;
-}
-
-/* 공통 규칙 — 규칙 본문 뒤에 요청까지 붙인 것.
-   이미 AI와 대화하며 주제를 정한 학생이 그 대화에 그대로 붙여넣는 용도. */
-function step3CommonRules() {
-  return step3FixedPrompt() + "\n\n■ 요청\n" + STEP3_REQUEST;
 }
 
 
@@ -1268,10 +1255,10 @@ function step3RenderFieldPicker() {
 function step3RenderRuleBox() {
   const pre = document.getElementById("rulebox-pre");
   const srcLine = document.getElementById("rule-datasrc-text");
-  if (pre) pre.textContent = step3CommonRules();
+  if (pre) pre.textContent = step3FixedPrompt();
   if (srcLine) {
-    srcLine.textContent = STEP3_STATE.source === "example" ? "예시 데이터 (CSV 첨부)"
-      : STEP3_STATE.source === "real" ? "실제 데이터 (CSV 첨부)" : "-";
+    srcLine.textContent = STEP3_STATE.source === "example" ? "예시 데이터 (CSV 링크)"
+      : STEP3_STATE.source === "real" ? "실제 데이터 (비밀번호 포함 링크)" : "-";
   }
 }
 
@@ -1289,38 +1276,6 @@ function step3BuildPrompt() {
   if (mood.trim()) text += "■ 디자인 무드\n- " + mood.trim() + "\n\n";
   text += "■ 요청\n" + STEP3_REQUEST;
   return text;
-}
-
-/* 버튼 하나에 복사 동작 + 완료 표시를 붙인다 */
-function step3AttachCopy(btn, getText, okMsg) {
-  if (!btn) return;
-  btn.addEventListener("click", function () {
-    const status = document.getElementById("build-status");
-    const text = getText();
-    if (text === null) return;
-    if (!navigator.clipboard) return;
-    navigator.clipboard.writeText(text).then(function () {
-      if (status) { status.textContent = okMsg; status.className = "lstate ok"; }
-      const old = btn.textContent;
-      btn.textContent = "복사됨";
-      setTimeout(function () { btn.textContent = old; }, 1400);
-    });
-  });
-}
-
-function step3InitRuleCopy() {
-  step3AttachCopy(
-    document.getElementById("btn-copy-rules"),
-    function () {
-      if (!STEP3_STATE.rows) {
-        const status = document.getElementById("build-status");
-        if (status) { status.textContent = "먼저 02에서 데이터를 골라주세요."; status.className = "lstate err"; }
-        return null;
-      }
-      return step3CommonRules();
-    },
-    "공통 규칙을 복사했습니다. 주제를 정한 AI 대화에 그대로 붙여넣으세요."
-  );
 }
 
 function step3InitBuilder() {
@@ -1393,11 +1348,150 @@ function initStep3() {
   if (fb) fb.addEventListener("click", step3LoadExample);
 
   step3RenderFieldPicker();
-  step3InitRuleCopy();
   step3InitBuilder();
   step3ToggleGuards();
 }
 
 document.addEventListener("DOMContentLoaded", function () {
   initStep3();
+});
+
+
+/* ============================================================
+   step4 — 데이터 활용 가이드
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   [교사 수정 구역] step4 예시 CSV 저장소 주소
+
+   깃허브 저장소의 data/ 폴더에 예시 CSV를 올린 뒤,
+   아래 주소를 자신의 계정·저장소 이름으로 바꾼다.
+   주소 끝의 슬래시(/)를 지우지 않는다.
+
+   형식: https://raw.githubusercontent.com/{계정}/{저장소}/main/data/
+   ------------------------------------------------------------ */
+
+const STEP4_CSV_BASE = "https://raw.githubusercontent.com/USERNAME/REPO/main/data/";
+
+/* ---------------------- [교사 수정 구역 끝] ---------------------- */
+
+
+/* ---------- 01 주제 카드 ---------- */
+
+let s4OpenCard = null; // 현재 펼쳐진 카드 (없으면 null)
+
+function s4ToggleCard(card) {
+  if (s4OpenCard && s4OpenCard !== card) {
+    s4OpenCard.classList.remove("is-open");
+    const prevBtn = s4OpenCard.querySelector(".tc-btn");
+    if (prevBtn) prevBtn.setAttribute("aria-expanded", "false");
+  }
+
+  const isOpen = card.classList.toggle("is-open");
+  const btn = card.querySelector(".tc-btn");
+  if (btn) btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+
+  s4OpenCard = isOpen ? card : null;
+}
+
+function s4InitCards() {
+  const grid = document.getElementById("topicgrid");
+  if (!grid) return;
+
+  grid.querySelectorAll(".topiccard").forEach(function (card) {
+    const btn = card.querySelector(".tc-btn");
+    if (!btn) return;
+    btn.setAttribute("aria-expanded", "false");
+    btn.addEventListener("click", function () {
+      s4ToggleCard(card);
+    });
+  });
+}
+
+
+/* ---------- 02 예시 CSV 링크 ---------- */
+
+function s4InitCsvLinks() {
+  const links = document.querySelectorAll(".csvlink");
+  if (!links.length) return;
+
+  const ready = STEP4_CSV_BASE.indexOf("USERNAME") === -1;
+
+  links.forEach(function (a) {
+    const name = a.dataset.csv;
+    if (!name) return;
+
+    if (ready) {
+      a.href = STEP4_CSV_BASE + name;
+      a.setAttribute("download", name);
+      a.title = name;
+    } else {
+      // 저장소 주소를 아직 넣지 않은 상태 — 링크를 누를 수 없게 둔다
+      a.removeAttribute("href");
+      a.setAttribute("aria-disabled", "true");
+      a.textContent = "준비 중";
+      a.title = "예시 자료를 준비하고 있습니다";
+    }
+  });
+}
+
+
+/* ---------- 04 분석 프롬프트 ---------- */
+
+function s4BuildPrompt() {
+  const topicEl = document.getElementById("s4-topic");
+  const goalEl = document.getElementById("s4-goal");
+  const topic = topicEl ? topicEl.value.trim() : "";
+  const goal = goalEl ? goalEl.value.trim() : "";
+
+  return [
+    "나는 과학고등학교 1학년 학생이고, '대기와 해양의 상호작용' 단원 수행평가로",
+    "데이터 기반 웹앱을 기획하고 있어.",
+    "",
+    "■ 다루는 주제: " + topic,
+    "■ 이 데이터로 특히 알고 싶은 것: " + goal,
+    "",
+    "첨부한(또는 아래 주소의) 데이터를 살펴보고, 본격적인 기획안을 쓰기 전에",
+    "데이터의 구조와 어떤 이야기를 할 수 있는지 먼저 파악해보려고 해.",
+    "",
+    "아래 순서로 봐줘.",
+    "1. 어떤 열(변수)이 있고 각각 무엇을 의미하는지",
+    "2. 결측치·이상치가 있는지, 있다면 어디인지",
+    "3. 데이터가 어떤 시간 범위를 다루고, 주기가 일별/월별/연별 중 무엇인지",
+    "4. 이 데이터로 확인할 수 있는 뚜렷한 패턴이나 추세 후보",
+    "5. 이 데이터로 어떤 웹앱 주제를 잡으면 좋을지 아이디어 1~2개",
+    "6. 함께 보면 분석이 더 풍부해질 만한 데이터가 있다면 추천"
+  ].join("\n");
+}
+
+function s4RenderPrompt() {
+  const pre = document.getElementById("s4-prompt");
+  if (!pre) return;
+  pre.textContent = s4BuildPrompt();
+}
+
+function s4InitPrompt() {
+  const pre = document.getElementById("s4-prompt");
+  if (!pre) return;
+
+  ["s4-topic", "s4-goal"].forEach(function (id) {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener("input", s4RenderPrompt);
+  });
+
+  s4RenderPrompt();
+}
+
+
+/* ---------- 초기화 ---------- */
+
+function initStep4() {
+  if (!document.getElementById("topicgrid")) return; // step4.html이 아니면 아무 것도 하지 않는다
+  s4InitCards();
+  s4InitCsvLinks();
+  s4InitPrompt();
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  initStep4();
 });

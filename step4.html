@@ -2,12 +2,18 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>데이터 활용 가이드 · 대기·해양 데이터 프로젝트</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
+<!-- ========== 헤더 ========== -->
 <header class="topbar">
   <div class="wrap">
     <a class="brand" href="index.html">과학자는 <span class="accent">데이터</span>로 의사소통한다</a>
@@ -15,63 +21,359 @@
   </div>
   <nav class="steptrack" aria-label="단계 이동">
     <div class="wrap">
-      <a href="step1.html">
-        <span class="st-num">STEP 01</span>
-        <span class="st-name">목표 및 평가 항목</span>
-      </a>
-      <a href="step2.html">
-        <span class="st-num">STEP 02</span>
-        <span class="st-name">데이터 분석 방법</span>
-      </a>
-      <a href="step3.html">
-        <span class="st-num">STEP 03</span>
-        <span class="st-name">웹앱 제작 연습</span>
-      </a>
-      <a href="step4.html" aria-current="step">
-        <span class="st-num">STEP 04</span>
-        <span class="st-name">데이터 활용 가이드</span>
-      </a>
-      <a href="step5.html">
-        <span class="st-num">STEP 05</span>
-        <span class="st-name">기획안 작성</span>
-      </a>
-      <a href="step6.html">
-        <span class="st-num">STEP 06</span>
-        <span class="st-name">웹앱 구현 및 점검</span>
-      </a>
+      <a href="step1.html"><span class="st-num">STEP 01</span><span class="st-name">목표 및 평가 항목</span></a>
+      <a href="step2.html"><span class="st-num">STEP 02</span><span class="st-name">데이터 분석 방법</span></a>
+      <a href="step3.html"><span class="st-num">STEP 03</span><span class="st-name">웹앱 제작 연습</span></a>
+      <a href="step4.html" aria-current="step"><span class="st-num">STEP 04</span><span class="st-name">데이터 활용 가이드</span></a>
+      <a href="step5.html"><span class="st-num">STEP 05</span><span class="st-name">기획안 작성</span></a>
+      <a href="step6.html"><span class="st-num">STEP 06</span><span class="st-name">웹앱 구현 및 점검</span></a>
     </div>
   </nav>
 </header>
 
-<main>
-  <section class="pagehead">
-    <div class="wrap">
-      <h1>데이터 활용 가이드</h1>
-      <p class="readtime">공개 예정 · 세부 내용 준비 중</p>
-    </div>
-  </section>
+<main class="wrap">
 
-  <section class="stepsection">
-    <div class="wrap">
-      <p class="lead">주제별로 활용할 수 있는 공공데이터 소스를 안내하는 페이지입니다.</p>
-
-      <div class="card">
-        <span class="badge b-todo">준비 중</span>
-        <h3>세부 내용을 조정하고 있습니다</h3>
-        <p>이 단계는 현재 구성안을 다듬는 중입니다. 지금은 앞 단계부터 순서대로 진행해 주세요.</p>
-        <p>준비가 끝나면 이 페이지에 주제별 데이터 소스와 활용 방법이 채워질 예정입니다.</p>
-      </div>
-    </div>
-  </section>
-
-  <div class="wrap">
-    <nav class="pagenav">
-      <a href="step3.html">← 웹앱 제작 연습</a>
-      <a href="index.html" class="nav-home">메인으로</a>
-      <a href="step5.html">기획안 작성 →</a>
-    </nav>
+  <div class="pagehead">
+    <h1>데이터 활용 가이드</h1>
+    <p class="readtime">읽는 데 약 10분</p>
   </div>
+
+  <!-- ========== 01. 주제 카드 ========== -->
+  <section class="stepsection" id="topics">
+    <div class="section-head">
+      <h2><span class="idx">01</span>어떤 주제를 다룰까</h2>
+      <p class="section-note">주제를 클릭하면 웹앱 예시를 볼 수 있습니다</p>
+    </div>
+
+    <p class="lead">
+      아래 9개는 공개된 자료를 비교적 구하기 쉬운 주제를 모아둔 것입니다.
+      교과서에 나온 내용이라면 이 목록에 없는 주제로 진행해도 됩니다.
+      다만 자료를 구할 수 있는지는 스스로 확인해야 하니, 다른 주제를 고를 때는
+      데이터 소스부터 먼저 점검해 보세요.
+    </p>
+
+    <ul class="topicgrid" id="topicgrid">
+
+      <li class="topiccard" data-topic="1">
+        <button type="button" class="tc-btn">
+          <span class="tc-unit">Ⅰ-1-01. 해수의 성질</span>
+          <span class="tc-face">
+            <span class="tc-title">해수의 수온 분포</span>
+          </span>
+          <span class="tc-back">
+            <span class="tc-ex-label">웹앱 예시</span>
+            <span class="tc-ex">깊이별 수온 그래프를 슬라이더로 넘기며, 수온약층이 계절마다
+              얕아지고 깊어지는 모습을 보여주는 단면도</span>
+          </span>
+        </button>
+      </li>
+
+      <li class="topiccard" data-topic="2">
+        <button type="button" class="tc-btn">
+          <span class="tc-unit">Ⅰ-1-01. 해수의 성질</span>
+          <span class="tc-face">
+            <span class="tc-title">해수의 염분 분포</span>
+          </span>
+          <span class="tc-back">
+            <span class="tc-ex-label">웹앱 예시</span>
+            <span class="tc-ex">하구와 외해 지점의 염분을 나란히 놓고, 강수량이 많았던 달에
+              염분이 낮아지는 패턴을 짚어 주는 비교 차트</span>
+          </span>
+        </button>
+      </li>
+
+      <li class="topiccard" data-topic="3">
+        <button type="button" class="tc-btn">
+          <span class="tc-unit">Ⅰ-2-01. 해양과 대기의 상호작용</span>
+          <span class="tc-face">
+            <span class="tc-title">엘니뇨·라니냐</span>
+          </span>
+          <span class="tc-back">
+            <span class="tc-ex-label">웹앱 예시</span>
+            <span class="tc-ex">해수면 온도 지수(ONI)와 기압 지수(SOI)를 함께 그려,
+              바다와 대기가 같이 진동한다는 현상 자체를 데이터로 보여주는 그래프</span>
+          </span>
+        </button>
+      </li>
+
+      <li class="topiccard" data-topic="4">
+        <button type="button" class="tc-btn">
+          <span class="tc-unit">Ⅰ-1-03. 기압과 날씨 변화</span>
+          <span class="tc-face">
+            <span class="tc-title">중위도 저기압·고기압</span>
+          </span>
+          <span class="tc-back">
+            <span class="tc-ex-label">웹앱 예시</span>
+            <span class="tc-ex">저기압이 지나가는 며칠 동안 기압·기온·풍향이 함께 바뀌는 과정을
+              순서대로 재생해 보여주는 시계열 뷰어</span>
+          </span>
+        </button>
+      </li>
+
+      <li class="topiccard" data-topic="5">
+        <button type="button" class="tc-btn">
+          <span class="tc-unit">Ⅰ-1-04. 태풍</span>
+          <span class="tc-face">
+            <span class="tc-title">태풍</span>
+          </span>
+          <span class="tc-back">
+            <span class="tc-ex-label">웹앱 예시</span>
+            <span class="tc-ex">연도별 태풍 발생 수와 한반도 영향 수를 비교하고,
+              최근 태풍 하나의 경로를 지도 위에 그려 보는 대시보드</span>
+          </span>
+        </button>
+      </li>
+
+      <li class="topiccard" data-topic="6">
+        <button type="button" class="tc-btn">
+          <span class="tc-unit">Ⅰ-1-05. 악기상</span>
+          <span class="tc-face">
+            <span class="tc-title">집중호우·폭설</span>
+          </span>
+          <span class="tc-back">
+            <span class="tc-ex-label">웹앱 예시</span>
+            <span class="tc-ex">시간당 최대 강수량이나 적설량의 가장 큰 값이 최근 몇 년 사이
+              얼마나 달라졌는지 보여주는 막대그래프</span>
+          </span>
+        </button>
+      </li>
+
+      <li class="topiccard" data-topic="7">
+        <button type="button" class="tc-btn">
+          <span class="tc-unit">Ⅰ-1-05. 악기상</span>
+          <span class="tc-face">
+            <span class="tc-title">황사</span>
+          </span>
+          <span class="tc-back">
+            <span class="tc-ex-label">웹앱 예시</span>
+            <span class="tc-ex">황사가 관측된 날수와 PM10 농도를 함께 그려,
+              황사가 대기에 남기는 영향을 수치로 보여주는 화면</span>
+          </span>
+        </button>
+      </li>
+
+      <li class="topiccard" data-topic="8">
+        <button type="button" class="tc-btn">
+          <span class="tc-unit">Ⅰ-2-02. 기후 변화</span>
+          <span class="tc-face">
+            <span class="tc-title">지구온난화 ①<br>대기 물리량</span>
+          </span>
+          <span class="tc-back">
+            <span class="tc-ex-label">웹앱 예시</span>
+            <span class="tc-ex">폭염일수·열대야일수·이산화탄소 농도를 한 화면에 겹쳐,
+              여러 증거가 동시에 나타난다는 점을 보여주는 복합 그래프</span>
+          </span>
+        </button>
+      </li>
+
+      <li class="topiccard" data-topic="9">
+        <button type="button" class="tc-btn">
+          <span class="tc-unit">Ⅰ-2-02. 기후 변화</span>
+          <span class="tc-face">
+            <span class="tc-title">지구온난화 ②<br>해양 물리량</span>
+          </span>
+          <span class="tc-back">
+            <span class="tc-ex-label">웹앱 예시</span>
+            <span class="tc-ex">동해안·서해안·남해안의 해수면 상승 속도를 나란히 비교해
+              지역에 따른 차이를 드러내는 막대그래프</span>
+          </span>
+        </button>
+      </li>
+
+    </ul>
+  </section>
+
+  <!-- ========== 02. 데이터를 받는 곳 ========== -->
+  <section class="stepsection" id="sources">
+    <div class="section-head">
+      <h2><span class="idx">02</span>데이터를 받는 곳</h2>
+      <p class="section-note">주제별 대표 사이트와 예시 자료</p>
+    </div>
+
+    <p class="lead">
+      대표 사이트에서 직접 조건을 골라 내려받는 것이 원칙입니다.
+      예시 자료는 실제 파일이 어떤 모양인지 미리 확인해 보라고 올려 둔 견본입니다.
+    </p>
+
+    <div class="tablewrap">
+      <table class="table srctable">
+        <thead>
+          <tr>
+            <th class="num-col">#</th>
+            <th>주제</th>
+            <th>대표 사이트</th>
+            <th class="when">로그인</th>
+            <th class="when">예시 자료<br>다운로드</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="num-col">1</td>
+            <th>해수의 수온 분포</th>
+            <td><a href="https://www.nifs.go.kr/kodc/observe/line/data" target="_blank" rel="noopener">국립수산과학원 정선해양관측</a></td>
+            <td class="when"><span class="badge b-open">불필요</span></td>
+            <td class="when"><a class="csvlink" data-csv="topic1-sea-temperature.csv" target="_blank" rel="noopener">CSV</a></td>
+          </tr>
+          <tr>
+            <td class="num-col">2</td>
+            <th>해수의 염분 분포</th>
+            <td><a href="https://www.meis.go.kr" target="_blank" rel="noopener">해양환경정보포털</a></td>
+            <td class="when"><span class="badge b-open">불필요</span></td>
+            <td class="when"><a class="csvlink" data-csv="topic2-salinity.csv" target="_blank" rel="noopener">CSV</a></td>
+          </tr>
+          <tr>
+            <td class="num-col">3</td>
+            <th>엘니뇨·라니냐</th>
+            <td>
+              <a href="https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt" target="_blank" rel="noopener">NOAA ONI</a> ·
+              <a href="https://www.cpc.ncep.noaa.gov/data/indices/soi" target="_blank" rel="noopener">SOI</a>
+            </td>
+            <td class="when"><span class="badge b-open">불필요</span></td>
+            <td class="when"><a class="csvlink" data-csv="topic3-enso.csv" target="_blank" rel="noopener">CSV</a></td>
+          </tr>
+          <tr>
+            <td class="num-col">4</td>
+            <th>중위도 저기압·고기압</th>
+            <td><a href="https://data.kma.go.kr/data/grnd/selectAsosList.do?pgmNo=34" target="_blank" rel="noopener">기상자료개방포털 ASOS</a></td>
+            <td class="when"><span class="badge b-todo">필요</span></td>
+            <td class="when"><a class="csvlink" data-csv="topic4-midlat-pressure.csv" target="_blank" rel="noopener">CSV</a></td>
+          </tr>
+          <tr>
+            <td class="num-col">5</td>
+            <th>태풍</th>
+            <td><a href="https://data.kma.go.kr/data/typhoonData/typTable.do" target="_blank" rel="noopener">기상자료개방포털 태풍정보</a></td>
+            <td class="when"><span class="badge b-todo">필요</span></td>
+            <td class="when"><a class="csvlink" data-csv="topic5-typhoon.csv" target="_blank" rel="noopener">CSV</a></td>
+          </tr>
+          <tr>
+            <td class="num-col">6</td>
+            <th>집중호우·폭설</th>
+            <td><a href="https://data.kma.go.kr/data/grnd/selectAsosList.do?pgmNo=34" target="_blank" rel="noopener">기상자료개방포털 ASOS</a></td>
+            <td class="when"><span class="badge b-todo">필요</span></td>
+            <td class="when"><a class="csvlink" data-csv="topic6-heavy-rain-snow.csv" target="_blank" rel="noopener">CSV</a></td>
+          </tr>
+          <tr>
+            <td class="num-col">7</td>
+            <th>황사</th>
+            <td><a href="https://data.kma.go.kr/data/climate/selectDustRltmList.do?pgmNo=68" target="_blank" rel="noopener">기상자료개방포털 황사관측</a></td>
+            <td class="when"><span class="badge b-todo">필요</span></td>
+            <td class="when"><a class="csvlink" data-csv="topic7-yellow-dust.csv" target="_blank" rel="noopener">CSV</a></td>
+          </tr>
+          <tr>
+            <td class="num-col">8</td>
+            <th>지구온난화 ① 대기</th>
+            <td><a href="https://data.kma.go.kr/climate/heatWave/selectHeatWaveChart.do" target="_blank" rel="noopener">기상자료개방포털 기후통계분석</a></td>
+            <td class="when"><span class="badge b-todo">필요</span></td>
+            <td class="when"><a class="csvlink" data-csv="topic8-warming-atmosphere.csv" target="_blank" rel="noopener">CSV</a></td>
+          </tr>
+          <tr>
+            <td class="num-col">9</td>
+            <th>지구온난화 ② 해양</th>
+            <td><a href="https://www.khoa.go.kr/oceangrid" target="_blank" rel="noopener">국립해양조사원 바다누리</a></td>
+            <td class="when"><span class="badge b-open">불필요</span></td>
+            <td class="when"><a class="csvlink" data-csv="topic9-warming-ocean.csv" target="_blank" rel="noopener">CSV</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note tide">
+      예시 자료는 파일의 생김새를 확인하라고 일부만 잘라 둔 견본입니다.
+      실제 분석에 쓸 최신 자료는 위의 대표 사이트에서 직접 받아야 합니다.
+      <strong>로그인이 필요한 곳은 각자 가입한 뒤 내려받으세요.</strong>
+    </div>
+  </section>
+
+  <!-- ========== 03. 더 찾아보고 싶다면 ========== -->
+  <section class="stepsection" id="more">
+    <div class="section-head">
+      <h2><span class="idx">03</span>더 찾아보고 싶다면</h2>
+      <p class="section-note">주제를 직접 정할 때 쓰는 곳</p>
+    </div>
+
+    <p class="lead">
+      위 표에 없는 주제를 고르거나, 자료를 하나 더 붙여 보고 싶을 때 찾아볼 만한 곳입니다.
+    </p>
+
+    <ul class="srclist">
+      <li class="src">
+        <span class="src-name">공공데이터포털</span>
+        <span class="src-url"><a href="https://www.data.go.kr" target="_blank" rel="noopener">data.go.kr</a></span>
+        <span class="src-desc">정부 부처 전체의 자료가 모여 있습니다.
+          <strong>‘파일데이터’ 탭에서만 받으세요.</strong> 같은 페이지의 ‘오픈API’ 탭은
+          별도 신청과 인증키가 필요해 이 수업에서는 쓰지 않습니다.</span>
+      </li>
+      <li class="src">
+        <span class="src-name">국가통계포털 KOSIS</span>
+        <span class="src-url"><a href="https://kosis.kr" target="_blank" rel="noopener">kosis.kr</a></span>
+        <span class="src-desc">통계청이 관리하는 국가 통계입니다. 원자료보다는 이미 정리된
+          요약표가 많아, 배경 수치를 덧붙일 때 쓰기 좋습니다.</span>
+      </li>
+      <li class="src">
+        <span class="src-name">Our World in Data</span>
+        <span class="src-url"><a href="https://ourworldindata.org" target="_blank" rel="noopener">ourworldindata.org</a></span>
+        <span class="src-desc">전 지구 규모의 기후·해양 지표를 그래프와 CSV로 함께 제공합니다.
+          우리나라 자료는 없으니, 지구온난화처럼 전 지구를 다루는 주제에 적합합니다.</span>
+      </li>
+      <li class="src">
+        <span class="src-name">NOAA 기후지수</span>
+        <span class="src-url"><a href="https://psl.noaa.gov/data/climateindices/list/" target="_blank" rel="noopener">psl.noaa.gov/data/climateindices/list</a></span>
+        <span class="src-desc">엘니뇨 관련 지수를 비롯한 여러 기후지수를 텍스트 파일로 제공합니다.
+          로그인 없이 주소만으로 바로 열립니다.</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ========== 04. 데이터 먼저 살펴보기 ========== -->
+  <section class="stepsection" id="peek">
+    <div class="section-head">
+      <h2><span class="idx">04</span>데이터 먼저 살펴보기</h2>
+      <p class="section-note">기획안을 쓰기 전에</p>
+    </div>
+
+    <p class="lead">
+      자료를 받았다면 곧바로 기획안을 쓰지 말고, 그 안에 무엇이 들어 있는지부터 확인하세요.
+      아래 두 칸을 채우고 <strong>복사하기</strong>를 누르면 내용이 반영된 프롬프트가 복사됩니다.
+      비워 두고 복사한 뒤 AI 입력창에서 직접 채워도 됩니다.
+    </p>
+
+    <div class="s4fields">
+      <label class="s4field">
+        <span class="s4label">다루는 주제</span>
+        <input type="text" id="s4-topic" placeholder="예) 태풍의 발생과 강도" autocomplete="off">
+      </label>
+      <label class="s4field">
+        <span class="s4label">이 데이터로 특히 알고 싶은 것</span>
+        <input type="text" id="s4-goal" placeholder="예) 최근 태풍이 더 강해지고 있는지 확인하고 싶어" autocomplete="off">
+      </label>
+    </div>
+
+    <div class="codeblock">
+      <button type="button" class="copy">복사하기</button>
+      <pre id="s4-prompt"></pre>
+    </div>
+
+    <div class="note">
+      파일이 너무 커서 첨부가 안 될 때는, 인증 없이 바로 열리는 공개 주소를 알려주고
+      분석을 맡길 수 있습니다.
+      <strong>로그인이나 개인 인증키가 필요한 주소는 프롬프트에 넣지 마세요.</strong>
+      AI는 로그인을 대신할 수 없고, 인증키를 그대로 적으면 키가 노출됩니다.
+    </div>
+
+    <div class="savenote">
+      이 페이지에 입력한 내용은 저장되지 않습니다. 새로고침하거나 페이지를 벗어나면 사라지니,
+      필요한 내용은 따로 기록해 두세요.
+    </div>
+  </section>
+
+  <nav class="pagenav" aria-label="페이지 이동">
+    <a href="step3.html">← 웹앱 제작 연습</a>
+    <a class="nav-home" href="index.html">메인으로</a>
+    <a href="step5.html">기획안 작성 →</a>
+  </nav>
+
 </main>
 
+<script src="script.js"></script>
 </body>
 </html>
