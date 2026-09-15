@@ -1511,3 +1511,31 @@ function initStep4() {
 document.addEventListener("DOMContentLoaded", function () {
   initStep4();
 });
+
+
+/* ============================================================
+   step6 — 웹앱 구현 및 점검
+   ============================================================ */
+
+/* ---------- 03 제출 전 점검 — 클릭하면 체크 상태 토글 ---------- */
+function initChecklist() {
+  document.querySelectorAll(".checklist .chip").forEach(function (chip) {
+    chip.setAttribute("aria-pressed", "false");
+    chip.addEventListener("click", function () {
+      const pressed = chip.getAttribute("aria-pressed") === "true";
+      chip.setAttribute("aria-pressed", pressed ? "false" : "true");
+    });
+  });
+}
+
+
+/* ---------- 초기화 ---------- */
+
+function initStep6() {
+  if (!document.querySelector(".checklist")) return; // step6.html이 아니면 아무 것도 하지 않는다
+  initChecklist();
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  initStep6();
+});

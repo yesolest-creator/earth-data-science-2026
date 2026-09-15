@@ -2,120 +2,142 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>웹앱 구현 및 점검 · 대기·해양 데이터 프로젝트</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
+<!-- ========== 헤더 ========== -->
 <header class="topbar">
   <div class="wrap">
     <a class="brand" href="index.html">과학자는 <span class="accent">데이터</span>로 의사소통한다</a>
     <span class="kicker">지구과학 · 대기와 해양의 상호작용</span>
   </div>
+  <nav class="steptrack" aria-label="단계 이동">
+    <div class="wrap">
+      <a href="step1.html"><span class="st-num">STEP 01</span><span class="st-name">목표 및 평가 항목</span></a>
+      <a href="step2.html"><span class="st-num">STEP 02</span><span class="st-name">데이터 분석 방법</span></a>
+      <a href="step3.html"><span class="st-num">STEP 03</span><span class="st-name">웹앱 제작 연습</span></a>
+      <a href="step4.html"><span class="st-num">STEP 04</span><span class="st-name">데이터 활용 가이드</span></a>
+      <a href="step5.html"><span class="st-num">STEP 05</span><span class="st-name">기획안 작성</span></a>
+      <a href="step6.html" aria-current="step"><span class="st-num">STEP 06</span><span class="st-name">웹앱 구현 및 점검</span></a>
+    </div>
+  </nav>
 </header>
 
-<nav class="steptrack" aria-label="단계 이동">
-  <div class="wrap">
-    <a href="step1.html"><span class="st-num">STEP 01</span><span class="st-name">목표 및 평가 항목</span></a>
-    <a href="step2.html"><span class="st-num">STEP 02</span><span class="st-name">데이터 분석 방법</span></a>
-    <a href="step3.html"><span class="st-num">STEP 03</span><span class="st-name">웹앱 제작 연습</span></a>
-    <a href="step4.html"><span class="st-num">STEP 04</span><span class="st-name">데이터 활용 가이드</span></a>
-    <a href="step5.html"><span class="st-num">STEP 05</span><span class="st-name">기획안 작성</span></a>
-    <a href="step6.html" aria-current="step"><span class="st-num">STEP 06</span><span class="st-name">웹앱 구현 및 점검</span></a>
-  </div>
-</nav>
+<main class="wrap">
 
-<main>
-  <div class="wrap">
-    <div class="pagehead">
-      <h1>웹앱 구현 및 점검</h1>
-      <p class="readtime">읽는 데 약 5분</p>
+  <div class="pagehead">
+    <h1>웹앱 구현 및 점검</h1>
+    <p class="readtime">읽는 데 약 5분</p>
+  </div>
+
+  <div class="savenote">
+    이 페이지에 입력한 내용은 저장되지 않습니다. 새로고침하거나 페이지를 벗어나면 사라지니,
+    필요한 내용은 따로 기록해 두세요.
+  </div>
+
+  <!-- ========== 01. 이 단계에서 할 일 ========== -->
+  <section class="stepsection" id="today">
+    <div class="section-head">
+      <h2><span class="idx">01</span>이 단계에서 할 일</h2>
+      <p class="section-note">구현부터 제출까지 네 단계</p>
     </div>
 
-    <div class="savenote">이 페이지에 입력한 내용은 저장되지 않습니다. 새로고침하거나 페이지를 벗어나면 사라지니, 필요한 내용은 따로 기록해 두세요.</div>
-  </div>
+    <p class="lead">
+      기획안에서 완성한 프롬프트를 AI 코딩 도구에 전달해 웹앱을 만들고, 제출 전까지 아래
+      네 단계를 거칩니다.
+    </p>
 
-  <!-- 01 이 단계에서 할 일 -->
-  <section class="stepsection">
-    <div class="wrap">
-      <div class="section-head">
-        <h2><span class="idx">01</span>이 단계에서 할 일</h2>
-      </div>
-      <p class="lead">기획안에서 완성한 프롬프트를 AI 코딩 도구에 전달해 웹앱을 만들고, 제출 전까지 아래 네 단계를 거칩니다.</p>
-      <ol class="flowsteps">
-        <li><strong>프롬프트로 구현 시작</strong><span>기획안에서 완성한 1·2단계 프롬프트를 AI 코딩 도구에 순서대로 전달합니다.</span></li>
-        <li><strong>반복 점검·디버깅</strong><span>결과물을 직접 열어보고, 의도와 다른 부분을 AI에게 다시 전달해 고쳐나갑니다.</span></li>
-        <li><strong>제출 전 점검</strong><span>체크리스트로 스스로 점검하고, AI에게도 최종 점검을 맡깁니다.</span></li>
-        <li><strong>결과 보고서 작성·제출</strong><span>완성된 웹앱을 바탕으로 보고서를 쓰고, 웹앱 파일과 함께 제출합니다.</span></li>
-      </ol>
+    <ol class="flowsteps">
+      <li><strong>프롬프트로 구현 시작</strong><span>기획안에서 완성한 1·2단계 프롬프트를 AI 코딩 도구에 순서대로 전달합니다.</span></li>
+      <li><strong>반복 점검·디버깅</strong><span>결과물을 직접 열어보고, 의도와 다른 부분을 AI에게 다시 전달해 고쳐나갑니다.</span></li>
+      <li><strong>제출 전 점검</strong><span>체크리스트로 스스로 점검하고, AI에게도 최종 점검을 맡깁니다.</span></li>
+      <li><strong>결과 보고서 작성·제출</strong><span>완성된 웹앱을 바탕으로 보고서를 쓰고, 웹앱 파일과 함께 제출합니다.</span></li>
+    </ol>
+  </section>
+
+  <!-- ========== 02. 구현 진행 가이드 ========== -->
+  <section class="stepsection" id="build">
+    <div class="section-head">
+      <h2><span class="idx">02</span>구현 진행 가이드</h2>
+      <p class="section-note">AI와 주고받으며 완성하기</p>
+    </div>
+
+    <p class="lead">
+      기획안에서 완성한 프롬프트를 AI 코딩 도구에 전달하면 웹앱 초안이 나옵니다. 이후 과정은
+      한 번에 완성되지 않고, 확인과 수정을 여러 차례 반복하며 다듬어집니다.
+    </p>
+
+    <div class="card">
+      <h3>반복 점검 흐름</h3>
+      <p>1단계·2단계 프롬프트를 순서대로 붙여넣어 초안을 받습니다. 나온 파일을 브라우저에서 직접 열어 실제로 어떻게 작동하는지 확인합니다.</p>
+      <p>의도와 다르게 작동하거나 오류가 있다면, 무엇이 어떻게 다른지 구체적으로 설명해 AI에게 다시 전달합니다. 화면을 캡처해 함께 전달하면 더 정확하게 고쳐집니다.</p>
+      <p>이 과정을 필요한 만큼 반복합니다. 코드를 직접 고칠 필요는 없습니다 — AI와의 대화로 계속 수정합니다.</p>
+    </div>
+
+    <div class="note tide">
+      막히는 부분이 있다면 무엇을 시도했고 어떤 결과가 나왔는지 구체적으로 적어 AI에게 전달하세요.
+      "안 돼요"보다 "이 버튼을 눌렀을 때 그래프가 비어 있어요"가 훨씬 빨리 해결됩니다.
     </div>
   </section>
 
-  <!-- 02 구현 진행 가이드 -->
-  <section class="stepsection">
-    <div class="wrap">
-      <div class="section-head">
-        <h2><span class="idx">02</span>구현 진행 가이드</h2>
-      </div>
-      <p class="lead">기획안에서 완성한 프롬프트를 AI 코딩 도구에 전달하면 웹앱 초안이 나옵니다. 이후 과정은 한 번에 완성되지 않고, 확인과 수정을 여러 차례 반복하며 다듬어집니다.</p>
-
-      <div class="card">
-        <h3>반복 점검 흐름</h3>
-        <p>1단계·2단계 프롬프트를 순서대로 붙여넣어 초안을 받습니다. 나온 파일을 브라우저에서 직접 열어 실제로 어떻게 작동하는지 확인합니다.</p>
-        <p>의도와 다르게 작동하거나 오류가 있다면, 무엇이 어떻게 다른지 구체적으로 설명해 AI에게 다시 전달합니다. 화면을 캡처해 함께 전달하면 더 정확하게 고쳐집니다.</p>
-        <p>이 과정을 필요한 만큼 반복합니다. 코드를 직접 고칠 필요는 없습니다 — AI와의 대화로 계속 수정합니다.</p>
-      </div>
-
-      <div class="note tide">막히는 부분이 있다면 무엇을 시도했고 어떤 결과가 나왔는지 구체적으로 적어 AI에게 전달하세요. "안 돼요"보다 "이 버튼을 눌렀을 때 그래프가 비어 있어요"가 훨씬 빨리 해결됩니다.</div>
+  <!-- ========== 03. 제출 전 점검 ========== -->
+  <section class="stepsection" id="checklist">
+    <div class="section-head">
+      <h2><span class="idx">03</span>제출 전 점검</h2>
+      <p class="section-note">체크리스트 + AI 최종 점검</p>
     </div>
-  </section>
 
-  <!-- 03 제출 전 점검 -->
-  <section class="stepsection">
-    <div class="wrap">
-      <div class="section-head">
-        <h2><span class="idx">03</span>제출 전 점검</h2>
-      </div>
-      <p class="lead">아래 체크리스트로 스스로 먼저 점검하세요. 그런 다음 아래 프롬프트로 AI 점검도 반드시 함께 거치세요. 특히 보안·개인정보 항목은 코드를 눈으로 훑어서는 놓치기 쉬워, AI의 도움 없이는 확인이 어렵습니다.</p>
+    <p class="lead">
+      아래 체크리스트로 스스로 먼저 점검하세요. 그런 다음 아래 프롬프트로 AI 점검도 반드시
+      함께 거치세요. 특히 보안·개인정보 항목은 코드를 눈으로 훑어서는 놓치기 쉬워, AI의 도움
+      없이는 확인이 어렵습니다.
+    </p>
 
-      <div class="checklist-group">
-        <span class="cg-label">보안·개인정보</span>
-        <ul class="checklist">
-          <li class="chip">API 키·토큰·비밀번호가 코드에 노출되지 않았다</li>
-          <li class="chip">localStorage·sessionStorage 등을 쓰지 않았다</li>
-          <li class="chip">방문자 개인정보(이름·이메일·위치)를 수집하지 않는다</li>
-          <li class="chip">인증키 필요한 외부 API를 호출하지 않는다</li>
-        </ul>
-      </div>
+    <div class="checklist-group">
+      <span class="cg-label">보안·개인정보</span>
+      <ul class="checklist">
+        <li><button type="button" class="chip">API 키·토큰·비밀번호가 코드에 노출되지 않았다</button></li>
+        <li><button type="button" class="chip">localStorage·sessionStorage 등을 쓰지 않았다</button></li>
+        <li><button type="button" class="chip">방문자 개인정보(이름·이메일·위치)를 수집하지 않는다</button></li>
+        <li><button type="button" class="chip">인증키 필요한 외부 API를 호출하지 않는다</button></li>
+      </ul>
+    </div>
 
-      <div class="checklist-group">
-        <span class="cg-label">파일 형식</span>
-        <ul class="checklist">
-          <li class="chip">index.html 파일 하나로만 되어 있다</li>
-          <li class="chip">CSS·JS가 각각 &lt;style&gt;/&lt;script&gt; 안에 포함되어 있다</li>
-        </ul>
-      </div>
+    <div class="checklist-group">
+      <span class="cg-label">파일 형식</span>
+      <ul class="checklist">
+        <li><button type="button" class="chip">index.html 파일 하나로만 되어 있다</button></li>
+        <li><button type="button" class="chip">CSS·JS가 각각 &lt;style&gt;/&lt;script&gt; 안에 포함되어 있다</button></li>
+      </ul>
+    </div>
 
-      <div class="checklist-group">
-        <span class="cg-label">기능</span>
-        <ul class="checklist">
-          <li class="chip">기획안에서 정한 필수 기능이 모두 오류 없이 작동한다</li>
-        </ul>
-      </div>
+    <div class="checklist-group">
+      <span class="cg-label">기능</span>
+      <ul class="checklist">
+        <li><button type="button" class="chip">기획안에서 정한 필수 기능이 모두 오류 없이 작동한다</button></li>
+      </ul>
+    </div>
 
-      <div class="checklist-group">
-        <span class="cg-label">의사소통</span>
-        <ul class="checklist">
-          <li class="chip">처음 보는 사람이 핵심 메시지를 오해 없이 이해할 수 있다</li>
-          <li class="chip">데이터가 뒷받침하지 않는 과장된 결론이 없다</li>
-        </ul>
-      </div>
+    <div class="checklist-group">
+      <span class="cg-label">의사소통</span>
+      <ul class="checklist">
+        <li><button type="button" class="chip">처음 보는 사람이 핵심 메시지를 오해 없이 이해할 수 있다</button></li>
+        <li><button type="button" class="chip">데이터가 뒷받침하지 않는 과장된 결론이 없다</button></li>
+      </ul>
+    </div>
 
-      <p class="subhead">AI에게 최종 점검 맡기기</p>
-      <div class="codeblock promptblock">
-        <button class="copy" type="button">복사</button>
-        <pre><span class="kw">■ 보안·개인정보 점검 (반드시 확인)</span>
+    <h3 class="subhead">AI에게 최종 점검 맡기기</h3>
+    <div class="codeblock promptblock">
+      <button type="button" class="copy">복사하기</button>
+      <pre><span class="kw">■ 보안·개인정보 점검 (반드시 확인)</span>
 지금까지 만든 코드 전체를 다시 살펴보고, 아래 항목이 하나라도 있으면 찾아서 알려주고 고쳐줘.
 - API 키, 토큰, 비밀번호가 코드 안에 그대로 노출된 부분
 - localStorage, sessionStorage 등 브라우저 저장 기능을 사용한 부분
@@ -136,107 +158,110 @@
 
 <span class="kw">■ 정리해서 보고</span>
 위 네 가지를 각각 "문제 없음" 또는 "문제 발견 — 내용" 형태로 정리해서 보여줘. 문제가 있는 항목은 어떻게 고칠지 먼저 설명하고, 내가 확인한 뒤에 수정을 지시하겠다.</pre>
-      </div>
     </div>
   </section>
 
-  <!-- 04 결과 보고서 작성 -->
-  <section class="stepsection">
-    <div class="wrap">
-      <div class="section-head">
-        <h2><span class="idx">04</span>결과 보고서 작성</h2>
-      </div>
-      <p class="lead">완성된 웹앱을 바탕으로 아래 다섯 항목을 서술합니다. 각 항목의 "참고"는 이 항목이 어떤 평가 기준에 대응하는지 보여주는 요약이며, 그 자체를 그대로 옮겨 적는 게 아니라 서술의 방향을 잡는 데 참고합니다.</p>
+  <!-- ========== 04. 결과 보고서 작성 ========== -->
+  <section class="stepsection" id="report">
+    <div class="section-head">
+      <h2><span class="idx">04</span>결과 보고서 작성</h2>
+      <p class="section-note">루브릭 다섯 영역 기준</p>
+    </div>
 
-      <div class="note tide">보고서 맨 위에 웹앱 제목을 적습니다. 기획안 0번 항목에 적은 제목과 동일해야 합니다.</div>
+    <p class="lead">
+      완성된 웹앱을 바탕으로 아래 다섯 항목을 서술합니다. 각 항목의 "참고"는 이 항목이 어떤
+      평가 기준에 대응하는지 보여주는 요약이며, 그대로 옮겨 적는 게 아니라 서술의 방향을
+      잡는 데 참고합니다.
+    </p>
 
-      <div class="card">
-        <h3>1. 웹앱 개요</h3>
-        <p class="ref">기획의 구체성 · 4점 — 관찰·연결·임팩트·요청 4단계를 모두 채웠다 / 각 단계마다 구체적인 데이터와 근거를 사용하였다 / 실행 가능한 수준까지 기획을 구체화하였다</p>
-        <p>기획안에서 세운 관찰-연결-임팩트-요청이 최종 웹앱에서 어떤 모습으로 구현되었는지, 기획과 달라진 부분이 있다면 무엇이 왜 달라졌는지 서술합니다.</p>
-      </div>
+    <div class="note tide">
+      보고서 맨 위에 웹앱 제목을 적습니다. 기획안 제출 시점과 제목이 달라졌을 수 있으니,
+      기획안에 적었던 제목이 아니라 완성된 웹앱의 &lt;title&gt;과 동일한 최종 제목을 적습니다.
+    </div>
 
-      <div class="card">
-        <h3>2. 데이터 출처와 처리 과정</h3>
-        <p class="ref">데이터 리터러시 · 3점 — 데이터 출처와 처리 과정을 투명하게 제시하였다 / 이상치·표본 왜곡 등 통계적 오류 없이 분석하였다</p>
-        <p>어떤 데이터를 어디서 가져와 어떤 과정을 거쳐 웹앱에 쓰이는 형태로 만들었는지, 데이터를 다루며 주의하거나 걸러낸 부분(이상치·결측·표본의 한계 등)이 있었다면 함께 서술합니다.</p>
-      </div>
+    <div class="card">
+      <h3>1. 웹앱 개요</h3>
+      <p class="ref">기획의 구체성 · 4점 — 관찰·연결·임팩트·요청 4단계를 모두 채웠다 / 각 단계마다 구체적인 데이터와 근거를 사용하였다 / 실행 가능한 수준까지 기획을 구체화하였다</p>
+      <p>기획안에서 세운 관찰-연결-임팩트-요청이 최종 웹앱에서 어떤 모습으로 구현되었는지, 기획과 달라진 부분이 있다면 무엇이 왜 달라졌는지 서술합니다.</p>
+    </div>
 
-      <div class="card">
-        <h3>3. 분석 결과와 근거</h3>
-        <p class="ref">과학적 타당성 · 3점 — 데이터가 뒷받침하는 범위 안에서 결론을 도출하였다 / 근거와 주장 사이에 논리적 비약이나 과잉 일반화가 없었다</p>
-        <p>분석을 통해 무엇을 알아냈는지, 그 결론이 데이터의 어느 지점에서 어떻게 뒷받침되는지 구체적 수치와 함께 서술합니다.</p>
-      </div>
+    <div class="card">
+      <h3>2. 데이터 출처와 처리 과정</h3>
+      <p class="ref">데이터 리터러시 · 3점 — 데이터 출처와 처리 과정을 투명하게 제시하였다 / 이상치·표본 왜곡 등 통계적 오류 없이 분석하였다</p>
+      <p>어떤 데이터를 어디서 가져와 어떤 과정을 거쳐 웹앱에 쓰이는 형태로 만들었는지, 데이터를 다루며 주의하거나 걸러낸 부분(이상치·결측·표본의 한계 등)이 있었다면 함께 서술합니다.</p>
+    </div>
 
-      <div class="card">
-        <h3>4. 전달 방식</h3>
-        <p class="ref">의사소통 효과성 · 3점 — 비전공 일반 대중이 이해할 수 있는 언어와 시각화를 사용하였다 / 핵심 메시지를 명료하고 과장 없이 전달하였다</p>
-        <p>이 주제를 처음 보는 사람에게 잘 전달되도록 웹앱을 어떻게 설계했는지, 언어와 시각화에서 내린 선택과 그 이유를 서술합니다.</p>
-      </div>
+    <div class="card">
+      <h3>3. 분석 결과와 근거</h3>
+      <p class="ref">과학적 타당성 · 3점 — 데이터가 뒷받침하는 범위 안에서 결론을 도출하였다 / 근거와 주장 사이에 논리적 비약이나 과잉 일반화가 없었다</p>
+      <p>분석을 통해 무엇을 알아냈는지, 그 결론이 데이터의 어느 지점에서 어떻게 뒷받침되는지 구체적 수치와 함께 서술합니다.</p>
+    </div>
 
-      <div class="card">
-        <h3>5. 웹앱 스크린샷</h3>
-        <p class="ref">웹앱 완성도 · 2점 — 웹앱이 오류 없이 작동하였다 / 기본적인 완성 수준을 갖추었다</p>
-        <p>핵심 화면 1~2장을 첨부하고, 웹앱이 실제로 어떻게 작동하는지 화면과 함께 간단히 설명합니다. 기술적 문제로 웹앱이 정상 작동하지 않을 경우, 이 항목이 평가 근거 자료 역할을 합니다.</p>
-      </div>
+    <div class="card">
+      <h3>4. 전달 방식</h3>
+      <p class="ref">의사소통 효과성 · 3점 — 비전공 일반 대중이 이해할 수 있는 언어와 시각화를 사용하였다 / 핵심 메시지를 명료하고 과장 없이 전달하였다</p>
+      <p>이 주제를 처음 보는 사람에게 잘 전달되도록 웹앱을 어떻게 설계했는지, 언어와 시각화에서 내린 선택과 그 이유를 서술합니다.</p>
+    </div>
+
+    <div class="card">
+      <h3>5. 웹앱 스크린샷</h3>
+      <p class="ref">웹앱 완성도 · 2점 — 웹앱이 오류 없이 작동하였다 / 기본적인 완성 수준을 갖추었다</p>
+      <p>핵심 화면 1~2장을 첨부하고, 웹앱이 실제로 어떻게 작동하는지 화면과 함께 간단히 설명합니다. 기술적 문제로 웹앱이 정상 작동하지 않을 경우, 이 항목이 평가 근거 자료 역할을 합니다.</p>
     </div>
   </section>
 
-  <!-- 05 제출 방법 -->
-  <section class="stepsection">
-    <div class="wrap">
-      <div class="section-head">
-        <h2><span class="idx">05</span>제출 방법</h2>
-      </div>
-      <p class="lead">결과 보고서 PDF와 웹앱 파일, 두 가지를 각각 제출합니다.</p>
+  <!-- ========== 05. 제출 방법 ========== -->
+  <section class="stepsection" id="submit">
+    <div class="section-head">
+      <h2><span class="idx">05</span>제출 방법</h2>
+      <p class="section-note">PDF와 웹앱 파일, 두 가지</p>
+    </div>
 
-      <div class="tablewrap">
-        <table class="table">
-          <thead>
-            <tr><th>제출물</th><th>경로</th><th>비고</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>결과 보고서 PDF</th>
-              <td>MS Teams 과제</td>
-              <td>기획안 PDF와는 별도 과제로 제출합니다.</td>
-            </tr>
-            <tr>
-              <th>웹앱 파일</th>
-              <td>MS Teams 과제 첨부</td>
-              <td><code>index.html</code> 파일 하나만 올리면 됩니다.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    <p class="lead">결과 보고서 PDF와 웹앱 파일, 두 가지를 각각 제출합니다.</p>
 
-      <p class="subhead">제출 전 최종 확인</p>
-      <div class="check"><div><strong>파일명이 index.html인지 확인했다</strong><span>AI 코딩 도구가 다른 이름으로 저장했다면 index.html로 바꿔서 제출합니다.</span></div></div>
-      <div class="check"><div><strong>PDF와 웹앱 파일을 각각 올바른 Teams 과제에 올렸다</strong><span>두 제출물은 서로 다른 과제이니 헷갈리지 않도록 확인합니다.</span></div></div>
+    <div class="tablewrap">
+      <table class="table">
+        <thead>
+          <tr><th>제출물</th><th>경로</th><th>비고</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>결과 보고서 PDF</th>
+            <td>MS Teams 과제</td>
+            <td>기획안 PDF와는 별도 과제로 제출합니다.</td>
+          </tr>
+          <tr>
+            <th>웹앱 파일</th>
+            <td>MS Teams 과제 첨부</td>
+            <td><code>index.html</code> 파일 하나만 올리면 됩니다.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subhead">제출 전 최종 확인</h3>
+    <div class="check"><strong>파일명이 index.html인지 확인했다</strong><span>AI 코딩 도구가 다른 이름으로 저장했다면 index.html로 바꿔서 제출합니다.</span></div>
+    <div class="check"><strong>PDF와 웹앱 파일을 각각 올바른 Teams 과제에 올렸다</strong><span>두 제출물은 서로 다른 과제이니 헷갈리지 않도록 확인합니다.</span></div>
+  </section>
+
+  <!-- ========== 06. 다음 단계 ========== -->
+  <section class="stepsection" id="next">
+    <div class="section-head">
+      <h2><span class="idx">06</span>다음 단계</h2>
+    </div>
+    <p class="lead">여기까지가 이 프로젝트의 전체 과정입니다. 수고했습니다.</p>
+    <div class="card">
+      <h3>제출 후</h3>
+      <p>모든 학생의 제출이 끝나면 메인 페이지의 "전체 웹앱 결과물 보기" 카드가 열립니다.</p>
     </div>
   </section>
 
-  <!-- 06 다음 단계 -->
-  <section class="stepsection">
-    <div class="wrap">
-      <div class="section-head">
-        <h2><span class="idx">06</span>다음 단계</h2>
-      </div>
-      <p class="lead">여기까지가 이 프로젝트의 전체 과정입니다. 수고했습니다.</p>
-      <div class="card">
-        <h3>제출 후</h3>
-        <p>모든 학생의 제출이 끝나면 메인 페이지의 "전체 웹앱 결과물 보기"와 "웹앱 사용자 평가 제출" 카드가 열립니다.</p>
-      </div>
-    </div>
-  </section>
+  <nav class="pagenav" aria-label="페이지 이동">
+    <a href="step5.html">← 기획안 작성</a>
+    <a class="nav-home" href="index.html">메인으로</a>
+    <span class="disabled">다음 단계 없음</span>
+  </nav>
 
-  <div class="wrap">
-    <nav class="pagenav">
-      <a href="step5.html">← 기획안 작성</a>
-      <a class="nav-home" href="index.html">메인으로</a>
-      <span class="disabled">다음 단계 없음</span>
-    </nav>
-  </div>
 </main>
 
 <script src="script.js"></script>
