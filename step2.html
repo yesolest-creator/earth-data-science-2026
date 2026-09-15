@@ -208,20 +208,6 @@
       <p>한 파일 안에는 여러 변수나 출처의 값이 섞여 있는 경우가 많습니다. 필요한 값만 골라내는 과정(전처리)까지 거쳐야 다음 표처럼 정리됩니다.</p>
     </div>
 
-    <div class="codeblock">
-      <button type="button" class="copy">복사</button>
-<pre><span class="cm"># 1) 전지구 평균기온 편차 (GISTEMP 기준만 골라내기)</span>
-temp = pd.read_csv(<span class="st">"…/global-temp/main/data/annual.csv"</span>)
-temp = temp[temp[<span class="st">'Source'</span>] == <span class="st">'GISTEMP'</span>][[<span class="st">'Year'</span>,<span class="st">'Mean'</span>]]
-
-<span class="cm"># 2) 대기 중 CO2 농도 (마우나로아 관측소)</span>
-co2 = pd.read_csv(<span class="st">"…/co2-ppm/main/data/co2-annmean-mlo.csv"</span>)
-co2 = co2[[<span class="st">'Year'</span>,<span class="st">'Mean'</span>]]
-
-<span class="cm"># 3) 연도를 기준으로 두 자료 합치기</span>
-df = pd.merge(temp, co2, on=<span class="st">'Year'</span>)</pre>
-    </div>
-
     <div data-needsdata hidden>
       <h3 class="subhead">정리된 표 — 마지막 6개 연도</h3>
       <div class="tablewrap">
