@@ -1864,46 +1864,52 @@ a.hubcard:hover .go{color:var(--abyss);transform:translateX(3px);}
   word-break:break-word;
 }
 
-/* 05 기획안 제출 — 짧은 칩 형태 체크리스트 (기존 .check 대신, step5 전용) */
+/* ---------- 37. step6 — .checklist/.chip(제출 전 점검) · .ref(결과 보고서 참고 문구) ---------- */
+.checklist-group{margin:0 0 20px;}
+.checklist-group:last-child{margin-bottom:0;}
+.checklist-group .cg-label{
+  display:block;
+  font-family:var(--font-mono);
+  font-size:11px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--mist);
+  margin-bottom:10px;
+}
 .checklist{
+  list-style:none;
+  margin:0;
+  padding:0;
   display:flex;
   flex-wrap:wrap;
-  gap:10px;
-  margin:0 0 22px;
-  padding:0;
-  list-style:none;
+  gap:8px;
 }
 .checklist .chip{
   display:flex;
   align-items:flex-start;
-  gap:8px;
+  gap:7px;
   padding:9px 13px;
   background:var(--white);
   border:1px solid var(--line);
-  border-radius:8px;
-  max-width:200px;
+  border-radius:20px;
+  font-size:13px;
+  line-height:1.5;
+  color:var(--abyss);
 }
 .checklist .chip::before{
   content:"";
   flex:none;
-  width:14px;height:14px;
-  margin-top:2px;
+  width:13px;height:13px;
+  margin-top:3px;
   border:2px solid var(--tide);
   border-radius:4px;
 }
-.checklist .chip div{
-  display:flex;
-  flex-direction:column;
-  gap:1px;
-  min-width:0;
-}
-.checklist .chip strong{
-  font-size:13.5px;
-  font-weight:700;
-  line-height:1.3;
-}
-.checklist .chip span{
-  font-size:11.5px;
-  line-height:1.3;
-  color:var(--slate);
+
+.ref{
+  font-size:12.5px;
+  line-height:1.6;
+  color:var(--mist);
+  margin:0 0 10px;
+  padding-left:12px;
+  border-left:2px solid var(--line);
 }
