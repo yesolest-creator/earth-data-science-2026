@@ -2,15 +2,21 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>기획안 작성 · 대기·해양 데이터 프로젝트</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
+<!-- ========== 헤더 ========== -->
 <header class="topbar">
   <div class="wrap">
-    <a href="index.html" class="brand">과학자는 <span class="accent">데이터</span>로 의사소통한다</a>
+    <a class="brand" href="index.html">과학자는 <span class="accent">데이터</span>로 의사소통한다</a>
     <span class="kicker">지구과학 · 대기와 해양의 상호작용</span>
   </div>
   <nav class="steptrack" aria-label="단계 이동">
@@ -25,79 +31,88 @@
   </nav>
 </header>
 
-<div class="wrap">
+<main class="wrap">
+
   <div class="pagehead">
     <h1>기획안 작성</h1>
     <p class="readtime">읽는 데 약 25분</p>
   </div>
-  <div class="savenote">이 페이지에 입력한 내용은 저장되지 않습니다. 새로고침하거나 페이지를 벗어나면 사라지니, 필요한 내용은 따로 기록해 두세요.</div>
-</div>
 
-<!-- 01. 오늘 할 일 -->
-<section class="stepsection">
-  <div class="wrap">
-    <h2>01 · 오늘 할 일</h2>
-    <p class="lead">오늘 두 가지를 만듭니다.</p>
-    <p>
-      <strong>1. 관찰-연결-임팩트-요청</strong> — 내가 다루는 데이터로 무엇을 전달할지 정리합니다.<br>
-      <strong>2. AI 코딩 도구에게 줄 프롬프트</strong> — 위 내용을 포함해, 웹앱을 만들 때 그대로 쓸 프롬프트를 완성합니다.
+  <div class="savenote">
+    이 페이지에 입력한 내용은 저장되지 않습니다. 새로고침하거나 페이지를 벗어나면 사라지니,
+    필요한 내용은 따로 기록해 두세요.
+  </div>
+
+  <!-- ========== 01. 이 단계에서 할 일 ========== -->
+  <section class="stepsection" id="today">
+    <div class="section-head">
+      <h2><span class="idx">01</span>이 단계에서 할 일</h2>
+      <p class="section-note">오늘 만드는 두 가지</p>
+    </div>
+
+    <p class="lead">
+      관찰-연결-임팩트-요청으로 전달할 메시지를 정리하고, AI 코딩 도구에 줄 프롬프트
+      (1단계 공통 규칙 + 2단계 개별화 틀)를 완성합니다. 실제 기획안 제출은 MS Teams 과제로 받습니다.
     </p>
+
     <ol class="flowsteps">
       <li><strong>메시지 프레임워크 정리</strong><span>관찰-연결-임팩트-요청 4단계로 전달할 메시지를 정리합니다.</span></li>
       <li><strong>프롬프트 1단계 확인</strong><span>AI 코딩 도구에 가장 먼저 붙여넣을 기본 규칙을 확인합니다.</span></li>
       <li><strong>프롬프트 2단계 작성</strong><span>내 웹앱의 세부 내용을 담은 개별화 틀을 채웁니다.</span></li>
       <li><strong>기획안 제출</strong><span>정리한 내용을 MS Teams 과제로 제출합니다.</span></li>
     </ol>
-  </div>
-</section>
+  </section>
 
-<!-- 02. 메시지 설계 프레임워크 -->
-<section class="stepsection">
-  <div class="wrap">
-    <h2>02 · 메시지 설계 프레임워크</h2>
-    <p class="lead">과학자는 데이터를 찾아내는 것만으로 끝나지 않습니다. 그 의미를 오해 없이 전달하는 것까지가 일입니다. 아래 4단계로 내 웹앱이 전달할 메시지를 정리합니다.</p>
+  <!-- ========== 02. 메시지 설계 프레임워크 ========== -->
+  <section class="stepsection" id="framework">
+    <div class="section-head">
+      <h2><span class="idx">02</span>메시지 설계 프레임워크</h2>
+      <p class="section-note">관찰 · 연결 · 임팩트 · 요청</p>
+    </div>
 
-    <ol class="msgframe">
-      <li class="mf-item">
-        <span class="mf-num">① 관찰</span>
-        <h3>데이터가 보여주는 현상은?</h3>
-        <p class="mf-ex">예시: CO₂ 농도가 35% 증가하는 동안 기온 편차가 0.03°C에서 1.19°C로 상승했습니다.</p>
-        <textarea rows="3" placeholder="내가 다루는 데이터가 보여주는 현상을 써 보세요."></textarea>
-        <p class="mf-note">저장되지 않습니다 — 기획안(MS Teams 과제)에 옮겨 적어야 최종 제출로 인정됩니다.</p>
-      </li>
-      <li class="mf-item">
-        <span class="mf-num">② 연결</span>
-        <h3>우리 삶·사회에 미치는 영향은?</h3>
-        <p class="mf-ex">예시: 온실효과라는 물리적 메커니즘이 이 상관관계를 뒷받침하며, 기온 상승은 기상이변·해수면 상승 등과 이어집니다.</p>
-        <textarea rows="3" placeholder="이 현상이 삶·사회에 미치는 영향을 써 보세요."></textarea>
-        <p class="mf-note">저장되지 않습니다 — 기획안(MS Teams 과제)에 옮겨 적어야 최종 제출로 인정됩니다.</p>
-      </li>
-      <li class="mf-item">
-        <span class="mf-num">③ 임팩트</span>
-        <h3>대중이 알면 무엇이 달라지는가?</h3>
-        <p class="mf-ex">예시: "기후변화가 심각하다더라"는 막연한 인상에서, "지난 66년간 CO₂가 35% 늘었고 기온이 이만큼 올랐다"는 구체적인 수치 감각을 갖게 됩니다.</p>
-        <textarea rows="3" placeholder="대중이 이 웹앱을 보고 무엇이 달라질지 써 보세요."></textarea>
-        <p class="mf-note">저장되지 않습니다 — 기획안(MS Teams 과제)에 옮겨 적어야 최종 제출로 인정됩니다.</p>
-      </li>
-      <li class="mf-item">
-        <span class="mf-num">④ 요청</span>
-        <h3>과학자로서 대중에게 요청하고 싶은 것은?</h3>
-        <p class="mf-ex">예시: 이 수치들이 실제로 존재한다는 걸 알아두고, 앞으로 기후 관련 뉴스나 정책을 접할 때 근거를 따져보길 바랍니다.</p>
-        <textarea rows="3" placeholder="대중에게 요청하고 싶은 것을 써 보세요."></textarea>
-        <p class="mf-note">저장되지 않습니다 — 기획안(MS Teams 과제)에 옮겨 적어야 최종 제출로 인정됩니다.</p>
-      </li>
-    </ol>
-  </div>
-</section>
+    <p class="lead">
+      과학자는 데이터를 찾아내는 것만으로 끝나지 않습니다. 그 의미를 오해 없이 전달하는 것까지가
+      일입니다. 아래 네 칸을 채워 내 웹앱이 전달할 메시지를 정리하세요.
+    </p>
 
-<!-- 03. 프롬프트 1단계 -->
-<section class="stepsection">
-  <div class="wrap">
-    <h2>03 · 웹앱 기획 프롬프트 — 1단계 공통 규칙</h2>
-    <p class="lead">AI 코딩 도구 작업을 시작할 때 가장 먼저 붙여넣는 기본 문구입니다.</p>
+    <div class="s4fields">
+      <label class="s4field">
+        <span class="s4label">① 관찰 — 데이터가 보여주는 현상은?</span>
+        <input type="text" id="s5-observe" placeholder="예) CO₂ 농도가 35% 증가하는 동안 기온 편차가 0.03°C에서 1.19°C로 상승했다" autocomplete="off">
+      </label>
+      <label class="s4field">
+        <span class="s4label">② 연결 — 우리 삶·사회에 미치는 영향은?</span>
+        <input type="text" id="s5-connect" placeholder="예) 온실효과라는 물리적 메커니즘이 이 상관관계를 뒷받침한다" autocomplete="off">
+      </label>
+      <label class="s4field">
+        <span class="s4label">③ 임팩트 — 대중이 알면 무엇이 달라지는가?</span>
+        <input type="text" id="s5-impact" placeholder="예) 막연한 인상에서 구체적인 수치 감각으로 바뀐다" autocomplete="off">
+      </label>
+      <label class="s4field">
+        <span class="s4label">④ 요청 — 과학자로서 대중에게 요청하고 싶은 것은?</span>
+        <input type="text" id="s5-ask" placeholder="예) 관련 뉴스나 정책을 접할 때 근거를 따져보길 바란다" autocomplete="off">
+      </label>
+    </div>
+
+    <div class="note">
+      여기 입력한 내용은 저장되지 않습니다. 기획안(MS Teams 과제)에 옮겨 적어야 최종 제출로
+      인정됩니다.
+    </div>
+  </section>
+
+  <!-- ========== 03. 프롬프트 1단계 — 공통 규칙 ========== -->
+  <section class="stepsection" id="rule1">
+    <div class="section-head">
+      <h2><span class="idx">03</span>프롬프트 1단계 — 공통 규칙</h2>
+      <p class="section-note">AI 코딩 도구에 가장 먼저 붙여넣기</p>
+    </div>
+
+    <p class="lead">
+      AI 코딩 도구 작업을 시작할 때 가장 먼저 붙여넣는 기본 문구입니다.
+    </p>
 
     <div class="codeblock">
-      <button class="copy" type="button">복사</button>
+      <button type="button" class="copy">복사하기</button>
       <pre>■ 역할
 - 너는 대기·해양 공공데이터를 일반 대중에게 전달하는 웹페이지를 만드는 개발자다.
 - 이 웹페이지의 목적은, 정량적으로 분석한 과학적 현상을 이 주제를 잘 모르는 사람도 이해할 수 있도록 전달하는 것이다.
@@ -131,20 +146,34 @@
     </div>
 
     <div class="note tide">
-      "(반드시 지킬 것)"이라고 표시된 항목(출력 형식, 데이터·보안 원칙)은 그대로 유지해야 하지만, 나머지 항목(역할, 사용자 맥락, 대상과 태도, 진행 방식)은 자신의 기획에 맞게 문장을 다듬거나 내용을 추가해도 됩니다. 프롬프트를 내 상황에 맞게 고쳐 쓰는 것도 이 활동에서 배우는 기술 중 하나입니다.
+      "(반드시 지킬 것)"이라고 표시된 항목(출력 형식, 데이터·보안 원칙)은 그대로 유지해야 하지만,
+      나머지 항목(역할, 사용자 맥락, 대상과 태도, 진행 방식)은 자신의 기획에 맞게 문장을 다듬거나
+      내용을 추가해도 됩니다. 프롬프트를 내 상황에 맞게 고쳐 쓰는 것도 이 활동에서 배우는 기술
+      중 하나입니다.
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- 04. 프롬프트 2단계 -->
-<section class="stepsection">
-  <div class="wrap">
-    <h2>04 · 웹앱 기획 프롬프트 — 2단계 개별화 틀</h2>
-    <p class="lead">1단계 다음에 이어서 붙여넣는 서식입니다. 대괄호 안을 내 기획에 맞게 채웁니다.</p>
+  <!-- ========== 04. 프롬프트 2단계 — 개별화 틀 ========== -->
+  <section class="stepsection" id="rule2">
+    <div class="section-head">
+      <h2><span class="idx">04</span>프롬프트 2단계 — 개별화 틀</h2>
+      <p class="section-note">1단계 다음에 이어 붙이기</p>
+    </div>
 
-    <div class="codeblock">
-      <button class="copy" type="button">복사</button>
-      <pre>[내가 만들 웹앱 — 세부 내용]
+    <p class="lead">
+      1단계 다음에 이어서 붙여넣는 서식입니다. 대괄호 안을 내 기획에 맞게 채우세요. 오른쪽 탭에서
+      기온·CO₂ 예시를 참고할 수 있습니다.
+    </p>
+
+    <div class="toggle" data-toggle role="tablist">
+      <button type="button" aria-controls="s5-blank" aria-selected="true">빈 서식</button>
+      <button type="button" aria-controls="s5-example" aria-selected="false">작성 예시</button>
+    </div>
+
+    <div id="s5-blank">
+      <div class="codeblock">
+        <button type="button" class="copy">복사하기</button>
+        <pre>[내가 만들 웹앱 — 세부 내용]
 
 ■ 1. 배경과 목표
 - 배경: [이 데이터가 다루는 현상은 무엇이며, 왜 지금 이걸 다뤄야 하는가]
@@ -182,11 +211,12 @@
 1) 진행하면서 예상되는 어려움이나, 내가 아직 정하지 않았지만 추가로 결정이 필요해 보이는 부분이 있다면 질문 형태로 정리해서 물어봐줘.
 2) 내가 그 질문에 답하고 나면, 최종적으로 이해한 기획 내용을 요약해서 보여줘.
 3) 그 요약이 내가 의도한 것과 맞는지 내가 확인한 뒤에 코드 작성을 지시하겠다.</pre>
+      </div>
     </div>
 
-    <details class="exwrap">
-      <summary>작성 예시 보기 (기온·CO₂)</summary>
-      <div class="exbody">
+    <div id="s5-example" hidden>
+      <div class="codeblock">
+        <button type="button" class="copy">복사하기</button>
         <pre>[내가 만들 웹앱 — 세부 내용]
 
 ■ 1. 배경과 목표
@@ -226,54 +256,52 @@
 - 차트/시각화 형태: 이중 축 선 그래프
 - 기타 요청: 두 선이 교차하거나 갈라지는 지점(예: 1990년대 이후 상승폭 가팔라지는 구간)을 시각적으로 강조</pre>
       </div>
-    </details>
+    </div>
+  </section>
 
-    <p>제시된 예시를 참고해서 MS Teams 과제에서 내용을 작성합니다.</p>
-  </div>
-</section>
+  <!-- ========== 05. 기획안 제출 ========== -->
+  <section class="stepsection" id="submit">
+    <div class="section-head">
+      <h2><span class="idx">05</span>기획안 제출</h2>
+      <p class="section-note">MS Teams 과제로 제출</p>
+    </div>
 
-<!-- 05. 기획안 제출 -->
-<section class="stepsection">
-  <div class="wrap">
-    <h2>05 · 기획안 제출</h2>
-    <p class="lead">기획안은 MS Teams 과제로 제출합니다. 이 페이지는 작성 항목을 안내할 뿐, 제출은 팀즈에서 이루어집니다.</p>
+    <p class="lead">
+      기획안은 MS Teams 과제로 제출합니다. 이 페이지는 작성 항목을 안내할 뿐, 제출은 팀즈에서
+      이루어집니다.
+    </p>
 
     <h3 class="subhead">Part A. 메시지 설계</h3>
-    <ul class="checklist">
-      <li class="chip"><div><strong>관찰</strong><span>보여주는 현상</span></div></li>
-      <li class="chip"><div><strong>연결</strong><span>삶·사회에 미치는 영향</span></div></li>
-      <li class="chip"><div><strong>임팩트</strong><span>알면 달라지는 것</span></div></li>
-      <li class="chip"><div><strong>요청</strong><span>대중에게 요청할 것</span></div></li>
-    </ul>
+    <div class="check"><strong>관찰</strong><span>데이터가 보여주는 현상</span></div>
+    <div class="check"><strong>연결</strong><span>우리 삶·사회에 미치는 영향</span></div>
+    <div class="check"><strong>임팩트</strong><span>대중이 알면 무엇이 달라지는가</span></div>
+    <div class="check"><strong>요청</strong><span>과학자로서 대중에게 요청하고 싶은 것</span></div>
 
     <h3 class="subhead">Part B. 웹앱 기획 명세</h3>
-    <ul class="checklist">
-      <li class="chip"><div><strong>배경과 목표</strong></div></li>
-      <li class="chip"><div><strong>대상</strong></div></li>
-      <li class="chip"><div><strong>데이터 명세</strong></div></li>
-      <li class="chip"><div><strong>기능 명세</strong></div></li>
-      <li class="chip"><div><strong>수락 기준</strong></div></li>
-      <li class="chip"><div><strong>리스크</strong></div></li>
-      <li class="chip"><div><strong>디자인</strong><span>선택 항목</span></div></li>
-    </ul>
-  </div>
-</section>
+    <div class="check"><strong>배경과 목표</strong></div>
+    <div class="check"><strong>대상</strong></div>
+    <div class="check"><strong>데이터 명세</strong></div>
+    <div class="check"><strong>기능 명세</strong></div>
+    <div class="check"><strong>수락 기준</strong></div>
+    <div class="check"><strong>리스크</strong></div>
+    <div class="check"><strong>디자인</strong><span>선택 항목</span></div>
+  </section>
 
-<!-- 06. 다음 단계 -->
-<section class="stepsection">
-  <div class="wrap">
-    <h2>06 · 다음 단계</h2>
-    <p>완성한 프롬프트(1단계+2단계)를 그대로 들고 다음 순서로 AI 코딩 도구와 대화를 시작합니다.</p>
-  </div>
-</section>
+  <!-- ========== 06. 다음 단계 ========== -->
+  <section class="stepsection" id="next">
+    <div class="section-head">
+      <h2><span class="idx">06</span>다음 단계</h2>
+    </div>
+    <p class="lead">완성한 프롬프트(1단계+2단계)를 그대로 들고 다음 순서로 AI 코딩 도구와 대화를 시작합니다.</p>
+  </section>
 
-<div class="wrap">
-  <nav class="pagenav">
+  <nav class="pagenav" aria-label="페이지 이동">
     <a href="step4.html">← 데이터 활용 가이드</a>
-    <a href="index.html" class="nav-home">메인으로</a>
+    <a class="nav-home" href="index.html">메인으로</a>
     <a href="step6.html">웹앱 구현 및 점검 →</a>
   </nav>
-</div>
+
+</main>
 
 <script src="script.js"></script>
 </body>
