@@ -1441,3 +1441,143 @@ function initStep3() {
 document.addEventListener("DOMContentLoaded", function () {
   initStep3();
 });
+
+
+/* ============================================================
+   step4 — 데이터 활용 가이드
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   [교사 수정 구역] step4 예시 CSV 저장소 주소
+
+   깃허브 저장소의 data/ 폴더에 예시 CSV를 올린 뒤,
+   아래 주소를 자신의 계정·저장소 이름으로 바꾼다.
+   주소 끝의 슬래시(/)를 지우지 않는다.
+
+   형식: https://raw.githubusercontent.com/{계정}/{저장소}/main/data/
+   ------------------------------------------------------------ */
+
+const STEP4_CSV_BASE = "https://raw.githubusercontent.com/USERNAME/REPO/main/data/";
+
+/* ---------------------- [교사 수정 구역 끝] ---------------------- */
+
+
+/* ---------- 01 주제 카드 ---------- */
+
+let s4OpenCard = null; // 현재 펼쳐진 카드 (없으면 null)
+
+function s4ToggleCard(card) {
+  if (s4OpenCard && s4OpenCard !== card) {
+    s4OpenCard.classList.remove("is-open");
+    const prevBtn = s4OpenCard.querySelector(".tc-btn");
+    if (prevBtn) prevBtn.setAttribute("aria-expanded", "false");
+  }
+
+  const isOpen = card.classList.toggle("is-open");
+  const btn = card.querySelector(".tc-btn");
+  if (btn) btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+
+  s4OpenCard = isOpen ? card : null;
+}
+
+function s4InitCards() {
+  const grid = document.getElementById("topicgrid");
+  if (!grid) return;
+
+  grid.querySelectorAll(".topiccard").forEach(function (card) {
+    const btn = card.querySelector(".tc-btn");
+    if (!btn) return;
+    btn.setAttribute("aria-expanded", "false");
+    btn.addEventListener("click", function () {
+      s4ToggleCard(card);
+    });
+  });
+}
+
+
+/* ---------- 02 예시 CSV 링크 ---------- */
+
+function s4InitCsvLinks() {
+  const links = document.querySelectorAll(".csvlink");
+  if (!links.length) return;
+
+  const ready = STEP4_CSV_BASE.indexOf("USERNAME") === -1;
+
+  links.forEach(function (a) {
+    const name = a.dataset.csv;
+    if (!name) return;
+
+    if (ready) {
+      a.href = STEP4_CSV_BASE + name;
+      a.setAttribute("download", name);
+      a.title = name;
+    } else {
+      // 저장소 주소를 아직 넣지 않은 상태 — 링크를 누를 수 없게 둔다
+      a.removeAttribute("href");
+      a.setAttribute("aria-disabled", "true");
+      a.textContent = "준비 중";
+      a.title = "예시 자료를 준비하고 있습니다";
+    }
+  });
+}
+
+
+/* ---------- 04 분석 프롬프트 ---------- */
+
+function s4BuildPrompt() {
+  const topicEl = document.getElementById("s4-topic");
+  const goalEl = document.getElementById("s4-goal");
+  const topic = topicEl ? topicEl.value.trim() : "";
+  const goal = goalEl ? goalEl.value.trim() : "";
+
+  return [
+    "나는 과학고등학교 1학년 학생이고, '대기와 해양의 상호작용' 단원 수행평가로",
+    "데이터 기반 웹앱을 기획하고 있어.",
+    "",
+    "■ 다루는 주제: " + topic,
+    "■ 이 데이터로 특히 알고 싶은 것: " + goal,
+    "",
+    "첨부한(또는 아래 주소의) 데이터를 살펴보고, 본격적인 기획안을 쓰기 전에",
+    "데이터의 구조와 어떤 이야기를 할 수 있는지 먼저 파악해보려고 해.",
+    "",
+    "아래 순서로 봐줘.",
+    "1. 어떤 열(변수)이 있고 각각 무엇을 의미하는지",
+    "2. 결측치·이상치가 있는지, 있다면 어디인지",
+    "3. 데이터가 어떤 시간 범위를 다루고, 주기가 일별/월별/연별 중 무엇인지",
+    "4. 이 데이터로 확인할 수 있는 뚜렷한 패턴이나 추세 후보",
+    "5. 이 데이터로 어떤 웹앱 주제를 잡으면 좋을지 아이디어 1~2개",
+    "6. 함께 보면 분석이 더 풍부해질 만한 데이터가 있다면 추천"
+  ].join("\n");
+}
+
+function s4RenderPrompt() {
+  const pre = document.getElementById("s4-prompt");
+  if (!pre) return;
+  pre.textContent = s4BuildPrompt();
+}
+
+function s4InitPrompt() {
+  const pre = document.getElementById("s4-prompt");
+  if (!pre) return;
+
+  ["s4-topic", "s4-goal"].forEach(function (id) {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener("input", s4RenderPrompt);
+  });
+
+  s4RenderPrompt();
+}
+
+
+/* ---------- 초기화 ---------- */
+
+function initStep4() {
+  if (!document.getElementById("topicgrid")) return; // step4.html이 아니면 아무 것도 하지 않는다
+  s4InitCards();
+  s4InitCsvLinks();
+  s4InitPrompt();
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  initStep4();
+});
