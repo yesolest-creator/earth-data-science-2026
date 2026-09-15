@@ -676,15 +676,6 @@ a.hubcard:hover .go{color:var(--abyss);transform:translateX(3px);}
   white-space:nowrap;
   width:1%;
 }
-.table .due{
-  font-family:var(--font-mono);
-  font-size:13px;
-  font-weight:500;
-  color:var(--abyss);
-  white-space:nowrap;
-  width:1%;
-}
-.table .due[data-state="empty"]{color:var(--mist);font-weight:400;}
 .table .warn{color:var(--alert);font-weight:600;}
 /* 셀 안 여러 줄 설명 */
 .table .lines{list-style:none;margin:0;padding:0;}
@@ -709,38 +700,6 @@ a.hubcard:hover .go{color:var(--abyss);transform:translateX(3px);}
   border-top:1px solid rgba(147,190,213,.6);
 }
 .table tr.total .num-col{font-size:15px;}
-
-/* ---------- 18. .selectbar — 반 선택 드롭다운 ---------- */
-.selectbar{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  flex-wrap:wrap;
-  margin-bottom:16px;
-}
-.selectbar label{
-  font-size:13.5px;
-  color:var(--slate);
-}
-.selectbar select{
-  font-family:var(--font-body);
-  font-size:14px;
-  font-weight:600;
-  letter-spacing:-.01em;
-  color:var(--abyss);
-  background:var(--white);
-  border:1px solid var(--line);
-  border-radius:8px;
-  padding:9px 38px 9px 14px;
-  cursor:pointer;
-  appearance:none;
-  background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5l5-5' fill='none' stroke='%235A6570' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;
-  background-position:right 14px center;
-  transition:border-color .15s ease;
-}
-.selectbar select:hover{border-color:var(--tide);}
-.selectbar select:focus-visible{border-color:var(--abyss);}
 
 /* ---------- 19. .flowsteps — 분석 과정 4단계 스트립 ---------- */
 .flowsteps{
@@ -1262,7 +1221,6 @@ a.hubcard:hover .go{color:var(--abyss);transform:translateX(3px);}
   .steptrack .st-name{font-size:12.5px;}
   .table{font-size:14px;min-width:460px;}
   .table th,.table td{padding:12px 14px;}
-  .selectbar select{width:100%;}
   .flowsteps,.methodgrid,.statrow{grid-template-columns:1fr;}
   .card{padding:20px 18px;}
   .loader{padding:18px 16px;}
@@ -1292,7 +1250,7 @@ a.hubcard:hover .go{color:var(--abyss);transform:translateX(3px);}
   .hubcard{break-inside:avoid;box-shadow:none;}
   .topbar{background:none;color:var(--abyss);border-bottom:1px solid var(--line);}
   .topbar .crumb,.topbar .crumb strong,.topbar .brand,.topbar .kicker{color:var(--abyss);}
-  .savenote,.selectbar,.pagenav,.steptrack{display:none;}
+  .savenote,.pagenav,.steptrack{display:none;}
   .tablewrap{box-shadow:none;overflow:visible;}
   .table{min-width:0;}
   .table tr{break-inside:avoid;}
@@ -1862,54 +1820,4 @@ a.hubcard:hover .go{color:var(--abyss);transform:translateX(3px);}
   color:var(--slate);
   white-space:pre-wrap;
   word-break:break-word;
-}
-
-/* ---------- 37. step6 — .checklist/.chip(제출 전 점검) · .ref(결과 보고서 참고 문구) ---------- */
-.checklist-group{margin:0 0 20px;}
-.checklist-group:last-child{margin-bottom:0;}
-.checklist-group .cg-label{
-  display:block;
-  font-family:var(--font-mono);
-  font-size:11px;
-  letter-spacing:.1em;
-  text-transform:uppercase;
-  color:var(--mist);
-  margin-bottom:10px;
-}
-.checklist{
-  list-style:none;
-  margin:0;
-  padding:0;
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-}
-.checklist .chip{
-  display:flex;
-  align-items:flex-start;
-  gap:7px;
-  padding:9px 13px;
-  background:var(--white);
-  border:1px solid var(--line);
-  border-radius:20px;
-  font-size:13px;
-  line-height:1.5;
-  color:var(--abyss);
-}
-.checklist .chip::before{
-  content:"";
-  flex:none;
-  width:13px;height:13px;
-  margin-top:3px;
-  border:2px solid var(--tide);
-  border-radius:4px;
-}
-
-.ref{
-  font-size:12.5px;
-  line-height:1.6;
-  color:var(--mist);
-  margin:0 0 10px;
-  padding-left:12px;
-  border-left:2px solid var(--line);
 }
