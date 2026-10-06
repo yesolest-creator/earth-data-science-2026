@@ -3,6 +3,75 @@
    index.html / step1~6.html 전 페이지에서 동일하게 사용
    ============================================================ */
 
+/* ------------------------------------------------------------
+   [교사 수정 구역] 반별 제출 기한
+   ------------------------------------------------------------
+   · 날짜는 "YYYY-MM-DD" 형식으로 적습니다. 예: "2026-09-15"
+   · null 로 두면 화면에 "미정" 으로 표시됩니다.
+   · default : 반을 아직 고르지 않았을 때 보여줄 "범위" (start ~ end)
+   · "1"~"8" : 각 반을 골랐을 때 보여줄 "하나의 날짜"
+   · plan  = 기획안 PDF / report = 결과 보고서 PDF / webapp = 웹앱 결과물
+
+   예시)
+     default: { plan:{start:"2026-09-14", end:"2026-09-18"}, ... }
+     "1":     { plan:"2026-09-15", report:"2026-09-25", webapp:"2026-09-25" },
+------------------------------------------------------------ */
+const SUBMIT_SCHEDULE = {
+  default: {
+    plan:   { start: null, end: null },
+    report: { start: null, end: null },
+    webapp: { start: null, end: null }
+  },
+  "1": { plan: null, report: null, webapp: null },
+  "2": { plan: null, report: null, webapp: null },
+  "3": { plan: null, report: null, webapp: null },
+  "4": { plan: null, report: null, webapp: null },
+  "5": { plan: null, report: null, webapp: null },
+  "6": { plan: null, report: null, webapp: null },
+  "7": { plan: null, report: null, webapp: null },
+  "8": { plan: null, report: null, webapp: null }
+};
+/* ---------------------- [교사 수정 구역 끝] ---------------------- */
+
+
+/* "2026-09-15" → "9월 15일" (값이 없으면 null) */
+function formatDate(iso) {
+  if (!iso) return null;
+  const m = String(iso).match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (!m) return null;
+  return `${Number(m[2])}월 ${Number(m[3])}일`;
+}
+
+/* 셀에 표시할 문자열 만들기 — 단일 날짜 또는 범위, 없으면 "미정" */
+function formatDue(value) {
+  if (!value) return null;
+  if (typeof value === "string") return formatDate(value);
+  const start = formatDate(value.start);
+  const end = formatDate(value.end);
+  if (start && end) return `${start} ~ ${end}`;
+  return start || end || null;
+}
+
+/* 제출물 표의 기한 셀 갱신 */
+function renderSubmitDates(classKey) {
+  const schedule = SUBMIT_SCHEDULE[classKey] || SUBMIT_SCHEDULE.default;
+  document.querySelectorAll("[data-due]").forEach(function (cell) {
+    const text = formatDue(schedule[cell.dataset.due]);
+    cell.textContent = text || "미정";
+    cell.dataset.state = text ? "set" : "empty";
+  });
+}
+
+function initClassSelect() {
+  const select = document.getElementById("class-select");
+  if (!select) return;
+  renderSubmitDates(select.value);
+  select.addEventListener("change", function () {
+    renderSubmitDates(select.value);
+  });
+}
+
+
 /* ============================================================
    step2 — 데이터 분석 방법
    ============================================================ */
@@ -727,6 +796,7 @@ window.s2mistakeGeneral = s2mistakeGeneral;
 
 
 document.addEventListener("DOMContentLoaded", function () {
+  initClassSelect();
   initStep2Loader();
   initToggles();
   initQuiz();
@@ -1387,7 +1457,7 @@ document.addEventListener("DOMContentLoaded", function () {
    형식: https://raw.githubusercontent.com/{계정}/{저장소}/main/data/
    ------------------------------------------------------------ */
 
-const STEP4_CSV_BASE = "https://raw.githubusercontent.com/USERNAME/REPO/main/data/";
+const STEP4_CSV_BASE = "https://raw.githubusercontent.com/yesolest-creator/earth-data-science-2026/main/data/";
 
 /* ---------------------- [교사 수정 구역 끝] ---------------------- */
 
@@ -1427,6 +1497,35 @@ function s4InitCards() {
 
 /* ---------- 02 예시 CSV 링크 ---------- */
 
+function s4DownloadCsv(url, name, link) {
+  // GitHub는 다른 도메인이라 download 속성이 무시된다.
+  // 파일을 받아 와서 저장 창을 띄운다.
+  const label = link.textContent;
+  link.textContent = "받는 중";
+
+  fetch(url)
+    .then(function (res) {
+      if (!res.ok) throw new Error(res.status);
+      return res.blob();
+    })
+    .then(function (blob) {
+      const href = URL.createObjectURL(blob);
+      const tmp = document.createElement("a");
+      tmp.href = href;
+      tmp.download = name;
+      document.body.appendChild(tmp);
+      tmp.click();
+      document.body.removeChild(tmp);
+      URL.revokeObjectURL(href);
+      link.textContent = label;
+    })
+    .catch(function () {
+      // 내려받기에 실패하면 새 탭으로 열어 준다
+      link.textContent = label;
+      window.open(url, "_blank", "noopener");
+    });
+}
+
 function s4InitCsvLinks() {
   const links = document.querySelectorAll(".csvlink");
   if (!links.length) return;
@@ -1437,17 +1536,22 @@ function s4InitCsvLinks() {
     const name = a.dataset.csv;
     if (!name) return;
 
-    if (ready) {
-      a.href = STEP4_CSV_BASE + name;
-      a.setAttribute("download", name);
-      a.title = name;
-    } else {
+    if (!ready) {
       // 저장소 주소를 아직 넣지 않은 상태 — 링크를 누를 수 없게 둔다
       a.removeAttribute("href");
       a.setAttribute("aria-disabled", "true");
       a.textContent = "준비 중";
       a.title = "예시 자료를 준비하고 있습니다";
+      return;
     }
+
+    const url = STEP4_CSV_BASE + name;
+    a.href = url;
+    a.title = name;
+    a.addEventListener("click", function (e) {
+      e.preventDefault();
+      s4DownloadCsv(url, name, a);
+    });
   });
 }
 
@@ -1510,32 +1614,4 @@ function initStep4() {
 
 document.addEventListener("DOMContentLoaded", function () {
   initStep4();
-});
-
-
-/* ============================================================
-   step6 — 웹앱 구현 및 점검
-   ============================================================ */
-
-/* ---------- 03 제출 전 점검 — 클릭하면 체크 상태 토글 ---------- */
-function initChecklist() {
-  document.querySelectorAll(".checklist .chip").forEach(function (chip) {
-    chip.setAttribute("aria-pressed", "false");
-    chip.addEventListener("click", function () {
-      const pressed = chip.getAttribute("aria-pressed") === "true";
-      chip.setAttribute("aria-pressed", pressed ? "false" : "true");
-    });
-  });
-}
-
-
-/* ---------- 초기화 ---------- */
-
-function initStep6() {
-  if (!document.querySelector(".checklist")) return; // step6.html이 아니면 아무 것도 하지 않는다
-  initChecklist();
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-  initStep6();
 });
